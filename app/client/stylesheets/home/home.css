@@ -1,0 +1,178 @@
+body,
+html {
+  font-family: 'Raleway', sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+a:active {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/**
+  *     Navbar Styles
+  **/
+
+.navbar__home {
+  position: fixed;
+  background-color: #F43284;
+  width: 100%;
+  height: 60px;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar__elements {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  -webkit-flex-flow: row wrap;
+  justify-content: flex-end;
+}
+
+.navbar__elements li {
+  text-decoration: none;
+  color: #fff !important;
+  margin: 10px 50px;
+  font-size: 24px;
+}
+
+.navbar__button {
+  height: 40px;
+  width: 160px;
+  font-size: 22px;
+  background-color: #FF880D;
+}
+
+.navbar__button {
+  white-space: nowrap;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  transition: 0.1s all ease;
+  color: #fff;
+  box-shadow: 0px 0px 0px 0px #B8B8B8;
+  border-bottom: 1px solid #b25f09;
+  outline: 0;
+}
+
+.navbar__button:hover {
+  background-color: #e57a0b;
+  top: -2px;
+  border-bottom: 2px solid #995107;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.navbar__button:active {
+  top: 0px;
+  border: 1px solid #995107;
+  background-color: #e57a0b;
+  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.navbar__button::-moz-focus-inner {
+  border: 0;
+}
+
+.navbar__button a {
+  outline: 0;
+  color: #fff;
+}
+
+.navbar__about {
+  color: #fff;
+}
+
+
+/**
+ **   Landing Page Styles
+ **/
+
+.landing__section {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  background-color: #451268;
+  overflow: hidden;
+}
+
+.landing__content {
+  position: absolute;
+  color: #FF880D;
+  text-align: center;
+  letter-spacing: 5px;
+  margin: 15% auto;
+  left: 0;
+  right: 0;
+  width: 60%;
+}
+
+.landing__title {
+  font-size: 100px;
+  font-weight: 500;
+  line-height: 100px;
+  text-transform: uppercase;
+}
+
+
+/**
+  *     What Section
+  **/
+
+.what__section {
+  width: 100%;
+  min-height: 100%;
+  background-color: #FF880D;
+  overflow: hidden;
+  text-align: center;
+  color: #451268;
+  margin: 0 auto;
+}
+
+.what__header {
+  margin: 80px auto;
+  width: 60%;
+}
+
+.what__title {
+  font-size: 80px;
+  font-weight: 600;
+}
+
+.what__subtitle {
+  margin: 40px 0;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+/**
+  *     Testimonial Section
+  **/
+
+.testimonial__section {
+  height: 15%;
+  min-height: 200px;
+  max-height: 350px;
+}
