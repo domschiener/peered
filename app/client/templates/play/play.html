@@ -1,0 +1,41 @@
+<template name="play">
+  <header>
+    <nav class="navbar__play">
+      <ul class="navbar__elements">
+        <li><button class="navbar__button"><a href="">Play Now</a></button></li>
+        <li><a class="navbar__about" href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="games">
+    <div class="container">
+      <div class="games__select col-xs-3">
+        <h1 class="select__title">View Options</h1>
+        <ul class="select__option">
+          <li data-text="all">All</li>
+          <li data-text="bets">With Bets</li>
+          <li data-text="nobets">No Bets</li>
+        </ul>
+      </div>
+      <div class="games__list col-xs-9">
+        <div class="gamer__profile col-xs-3">
+          <div class="gamer__picture">
+            <img src="/picture.jpg" />
+            <div class="gamer__overlay"></div>
+          </div>
+          <div class="gamer__header">
+            <div class="gamer__left col-xs-8">
+              <p class="gamer__name">Dominik Schiener</p>
+            </div>
+            <div class="gamer__right col-xs-4">
+              <p class="gamer__bet">Bet</p>
+              <p class="gamer__amount">0</p>
+            </div>
+          </div>
+        </div>
+        <div class="gamer__profile col-xs-3"></div>
+        <div class="gamer__profile col-xs-3"></div>
+      </div>
+    </div>
+  </section>
+</template>

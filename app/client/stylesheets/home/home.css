@@ -171,8 +171,28 @@ a:active {
   *     Testimonial Section
   **/
 
-.testimonial__section {
-  height: 15%;
-  min-height: 200px;
-  max-height: 350px;
+/*.testimonial__section {
+  min-height: 500px;
+  background-color: #790E51;
+  overflow: hidden;
+  text-align: center;
 }
+
+.testimonial__title {
+  font-size: 80px;
+  font-weight: 600;
+  color: #FF880D;
+}
+
+.testimonial__reviews {
+
+}
+
+.testimonial__reviewer {
+  height: 300px;
+  width: 200px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin: 30px;
+}*/
