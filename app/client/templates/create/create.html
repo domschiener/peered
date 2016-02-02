@@ -1,0 +1,51 @@
+<template name="create">
+  <header>
+    <nav class="navbar__play">
+      <ul class="navbar__elements">
+        <li><button class="navbar__button"><a href="">Play Now</a></button></li>
+        <li><a class="navbar__about" href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="create__section">
+    <div class="container">
+      <div class="first_step">
+        <div class="steps_header">
+          <button class="step_button">1</button>
+          <span class="step_title">Choose your Grid Size</span>
+        </div>
+      </div>
+      <div class="second_step">
+        <div class="steps_header">
+          <button class="step_button">2</button>
+          <span class="step_title">Settings</span>
+        </div>
+        <div class="settings container">
+          <div class="settings__betting col-xs-5">
+            <div class="input-group">
+              <span class="settings__name">Do you want to Bet?</span>
+              <input class="betswitch" type="checkbox" name="private">
+            </div>
+            <div class="betting hide">
+              <!-- <span class="settings__name">Bet Amount: </span> -->
+              <div class="input-group">
+                <span class="input-group-addon" id="ether_sign">Ξ</span>
+                <input type="number" min="0" max="10" class="form-control ether_amount" placeholder="Ether Amount" aria-describedby="ether_sign">
+              </div>
+            </div>
+          </div>
+          <div class="settings__private col-xs-7">
+            <span class="settings__name">Private Game?</span>
+            <input class="bootswitch" type="checkbox" name="private">
+          </div>
+        </div>
+      </div>
+      <div class="third_step">
+        <div class="steps_header">
+          <button class="step_button">3</button>
+          <span class="step_title">Betting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

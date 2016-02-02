@@ -8,6 +8,12 @@ html {
   box-sizing: border-box;
 }
 
+textarea,
+input,
+button {
+    outline: none !important;
+}
+
 a {
   text-decoration: none;
 }

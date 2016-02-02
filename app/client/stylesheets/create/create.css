@@ -1,0 +1,70 @@
+.create__section {
+  min-height: 100%;
+  width: 100%;
+  background-color: #f4f4f4;
+  position: relative;
+}
+
+/**
+  *     First Step CSS
+  **/
+
+
+.first_step {
+  margin-top: 100px;
+}
+
+.step_button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 3px solid #451268;
+  color: #451268;
+  background: #f4f4f4;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.step_title {
+  font-size: 32px;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+/**
+  *     Settings Step
+  **/
+
+.second_step {
+  margin: 25px 0;
+}
+
+.settings {
+  margin: 40px 0;
+}
+
+.bootstrap-switch-handle-on {
+  background: #451268 !important;
+}
+
+.betting {
+  margin: 25px 0;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.ether_amount {
+  width: 150px !important;
+}
+
+.settings__betting {
+  border-right: 1px solid #ccc;
+}
+
+.settings__name {
+  font-size: 22px;
+  font-weight: 500;
+  margin-right: 20px;
+}

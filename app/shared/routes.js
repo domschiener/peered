@@ -5,3 +5,7 @@ Router.route('/', {
 Router.route('/play', {
   template: 'play'
 });
+
+Router.route('/create', {
+  template: 'create'
+});
