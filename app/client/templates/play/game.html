@@ -1,0 +1,53 @@
+<template name="game">
+  <header>
+    <nav class="navbar__play">
+      <ul class="navbar__elements">
+        <li></li>
+        <li><a class="navbar__about" href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="game__section">
+    <!-- Created by Michael Mammoliti -->
+    <div id='wrapper'>
+      <div id='ui'>
+        <div class='player'>
+          <img src='http://michaelmammoliti.com/_projects/tictactoe/img/cross.png' />
+          <p class='big'></p>
+        </div>
+        <div id='points'>&nbsp;</div>
+        <div class='player'>
+          <img src='http://michaelmammoliti.com/_projects/tictactoe/img/circle.png' />
+          <p class='big'></p>
+        </div>
+      </div> <!--  ui -->
+
+      <div id='tictactoe'>
+        <ul>
+          <li><button id='cell-1' class='cell'>&nbsp;</button></li>
+          <li><button id='cell-2' class='cell'>&nbsp;</button></li>
+          <li><button id='cell-3' class='cell'>&nbsp;</button></li>
+
+          <li><button id='cell-4' class='cell'>&nbsp;</button></li>
+          <li><button id='cell-5' class='cell'>&nbsp;</button></li>
+          <li><button id='cell-6' class='cell'>&nbsp;</button></li>
+
+          <li><button id='cell-7' class='cell'>&nbsp;</button></li>
+          <li><button id='cell-8' class='cell'>&nbsp;</button></li>
+          <li><button id='cell-9' class='cell'>&nbsp;</button></li>
+        </ul>
+      </div> <!--  tictactoe -->
+    </div>  <!--  wrapper -->
+
+    <div class='hoverdiv hidden'>
+      <div id='actions'>
+        <p class='big text-center'>&nbsp;</p>
+
+        <div id='controls'>
+          <button id='newround'>NEW ROUND</button>
+          <button id='newgame'>NEW GAME</button>
+        </div>
+      </div>
+    </div>  <!--  hoverdiv -->
+  </section>
+</template>
