@@ -8,7 +8,7 @@
 }
 
 .big {
-  font-size: 2em;
+  font-size: 28px;
 }
 
 .bold {
@@ -99,12 +99,6 @@
 .cell:hover {
   background-color: rgba(183, 187, 203, 0.3);
 }
-.cell.active.player-0::after {
-  background-color: rgba(237, 94, 94, 0.2);
-}
-.cell.active.player-1::after {
-  background-color: rgba(94, 218, 237, 0.2);
-}
 .cell::before {
   content: "";
   width: 50%;
@@ -119,41 +113,30 @@
   height: 100%;
 }
 .cell.player-0::before {
-  background-image: url("http://michaelmammoliti.com/_projects/tictactoe/img/cross.png");
+  background-image: url("/images/cross.png");
 }
 .cell.player-1::before {
-  background-image: url("http://michaelmammoliti.com/_projects/tictactoe/img/circle.png");
+  background-image: url("/images/circle.png");
 }
 
 #ui {
   width: 100%;
   z-index: 999;
-  height: 70px;
+  height: 90px;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(173, 177, 193, 0.3);
 }
-#ui div {
+
+#points,
+.player {
   width: 35%;
   float: left;
-  padding: 20px;
   position: relative;
-  overflow: hidden;
   transition: background 1s ease 0s;
   -o-transition: background 1s ease 0s;
   -ms-transition: background 1s ease 0s;
   -moz-transition: background 1s ease 0s;
   -webkit-transition: background 1s ease 0s;
-}
-#ui div.active {
-  background-color: rgba(221, 221, 221, 0.2);
-  transition: background 1s ease 0s;
-  -o-transition: background 1s ease 0s;
-  -ms-transition: background 1s ease 0s;
-  -moz-transition: background 1s ease 0s;
-  -webkit-transition: background 1s ease 0s;
-}
-#ui div.active p {
-  color: #fff;
 }
 #ui div:nth-child(1) p {
   text-align: right;
@@ -161,30 +144,40 @@
 #ui div:nth-child(1) img {
   left: 10px;
 }
-#ui div:nth-child(1).active {
-  background-color: rgba(237, 94, 94, 0.5);
-}
 #ui div:nth-child(3) img {
   right: 10px;
 }
 #ui div:nth-child(3) p {
   text-align: left;
 }
-#ui div:nth-child(3).active {
-  background-color: rgba(94, 218, 237, 0.5);
-}
-#ui div img {
+.top_image {
   display: inline-block;
   width: 80px;
   position: absolute;
-  top: 10px;
+  margin: 5px 0;
   z-index: 0;
 }
-#ui div p {
-  line-height: 30px;
-  height: 30px;
-  z-index: 1;
-  position: relative;
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 90px;
+}
+
+.right {
+  float: right;
+}
+
+.name p {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.name_picture {
+  width: 50px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
 }
 
 #actions p {
