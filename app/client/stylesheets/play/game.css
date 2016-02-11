@@ -97,7 +97,7 @@
   cursor: pointer;
 }
 .cell:hover {
-  background-color: rgba(183, 187, 203, 0.3);
+  background-color: #eee;
 }
 .cell::before {
   content: "";

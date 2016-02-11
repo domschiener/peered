@@ -1,0 +1,62 @@
+.back__home {
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background-color: #451268;
+  font-size: 18px;
+  margin: 20px;
+}
+.back__home:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.join__left,
+.join__right {
+  height: 100%;
+}
+
+.join__left {
+  background-color: #451268;
+}
+
+/**
+  * JOIN RIGHT
+  **/
+
+.join__right {
+  background-color: #FFBA33;
+}
+
+.login__buttons {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login__box {
+  align-self: center;
+  background-color: #fff;
+  width: 350px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  -webkit-box-shadow: 0px 5px 17px -4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 5px 17px -4px rgba(0,0,0,0.75);
+  box-shadow: 0px 5px 17px -4px rgba(0,0,0,0.75);
+}
+
+.login__title {
+  align-self: center;
+  background-color: #451268;
+  width: 350px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.login__title p {
+  color: #ffb11a;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin: 10px 0;
+}

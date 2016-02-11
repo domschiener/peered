@@ -138,7 +138,7 @@ a:active {
 
 .landing__content {
   position: absolute;
-  color: #FF880D;
+  color: #FFBA33;
   text-align: center;
   letter-spacing: 5px;
   margin: 15% auto;
@@ -162,7 +162,7 @@ a:active {
 .what__section {
   width: 100%;
   min-height: 100%;
-  background-color: #FF880D;
+  background-color: #FFBA33;
   overflow: hidden;
   text-align: center;
   color: #451268;
