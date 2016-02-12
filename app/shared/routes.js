@@ -14,13 +14,14 @@ Router.route('/join', {
   }
 });
 
+Router.route('/games', {
+  name: 'games',
+  template: 'games'
+});
+
 Router.route('/play', {
   name: 'play',
   template: 'play'
-});
-
-Router.route('/game', {
-  template: 'game'
 });
 
 Router.route('/create', {

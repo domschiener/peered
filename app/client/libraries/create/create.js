@@ -38,7 +38,9 @@ Template.create.events({
       newGame['value'] = $('.ether_amount').val();
     }
     Meteor.call('newGame', newGame, function(error, success) {
-      console.log(error, success);
+      if (!error) {
+        Router.go()
+      }
     })
   }
 })
