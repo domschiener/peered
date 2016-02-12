@@ -30,6 +30,10 @@ a {
   text-decoration: none;
 }
 
+button:hover {
+  color: #fff !important;
+}
+
 a:hover {
   color: inherit !important;
   text-decoration: none !important;

@@ -9,6 +9,11 @@
   *     First Step CSS
   **/
 
+.first_step,
+.second_step,
+.third_step {
+  margin: 100px 0;
+}
 
 .first_step {
   margin-top: 100px;
@@ -21,7 +26,7 @@
   border: 3px solid #451268;
   color: #451268;
   background: #f4f4f4;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 700;
 }
 
@@ -30,6 +35,34 @@
   font-weight: 500;
   margin-left: 20px;
 }
+
+.options {
+  margin: 30px 0;
+}
+
+.btn__option {
+  position: relative;
+  width: 300px;
+  border-radius: 5px;
+}
+
+.btn-group .active {
+  border: 5px solid #FF880D;
+  border-radius: 15px !important;
+}
+
+.option__image {
+  width: 60%;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+}
+
+#tictactoe,
+#rockpaperscissor {
+  position: relative;
+  width: 0 !important;
+}
+
 
 /**
   *     Settings Step
@@ -60,11 +93,19 @@
 }
 
 .settings__betting {
-  border-right: 1px solid #ccc;
+  border-right: 2px solid #ccc;
 }
 
 .settings__name {
   font-size: 22px;
   font-weight: 500;
   margin-right: 20px;
+}
+
+#submitGame {
+  margin-left: 50px;
+  height: 60px;
+  width: 200px;
+  font-size: 26px;
+  font-weight: 600;
 }

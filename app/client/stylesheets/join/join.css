@@ -60,3 +60,78 @@
   text-align: center;
   margin: 10px 0;
 }
+
+/**
+  *   Login Buttons
+  **/
+
+.option {
+  align-self: center;
+  margin: 15px 0;
+}
+
+.login__options {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.twitter_login,
+.facebook_login,
+.google_login,
+.github_login {
+  align-self: center;
+  height: 45px;
+  width: 150px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+}
+
+.twitter_logo,
+.facebook_logo,
+.google_logo,
+.github_logo {
+  height: 45px;
+  width: 50px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: #fff;
+  float: left;
+  line-height: 45px;
+  text-align: center;
+}
+
+.twitter_logo {
+  margin-top: 10px;
+  background: #189bcb;
+}
+.twitter_login {
+  margin-top: 10px;
+  background: #1bb2e9;
+}
+
+.facebook_logo {
+  background: #0064ab;
+}
+.facebook_login {
+  background: #0079ce;
+}
+
+.google_logo {
+  background: #c64333;
+}
+.google_login {
+  background: #DD4B39;
+}
+
+.github_logo {
+  background: #262626;
+  margin-bottom: 10px;
+}
+.github_login {
+  background: #2B2B2B;
+  margin-bottom: 10px;
+}

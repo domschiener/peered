@@ -16,3 +16,29 @@ Template.create.rendered = function() {
     }
   });
 }
+
+Template.create.events({
+  'click #submitGame': function() {
+    var newGame = {};
+    var tictactoe = $("#tictactoe:checked").val();
+    newGame['type'];
+    // Get user chosen game
+    if (tictactoe) {
+      newGame['type'] = 'tictactoe';
+    }
+    else {
+      newGame['type'] = 'rockpaperscissor';
+    }
+
+    newGame['privateGame'] = $('.private_game').bootstrapSwitch('state');
+
+    newGame['betting'] = $('.betswitch').bootstrapSwitch('state');
+    // If the user wants to bet, get value
+    if (newGame['betting']) {
+      newGame['value'] = $('.ether_amount').val();
+    }
+    Meteor.call('newGame', newGame, function(error, success) {
+      console.log(error, success);
+    })
+  }
+})

@@ -1,1 +1,1 @@
-Games = new Meteor.Collection(null);
+GamesData = new Meteor.Collection(null);

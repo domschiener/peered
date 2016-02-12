@@ -4,10 +4,18 @@ Router.route('/', {
 });
 
 Router.route('/join', {
-  template: 'join'
+  name: 'join',
+  template: 'join',
+  onBeforeAction: function() {
+    if (Meteor.user()) {
+      Router.go('play');
+    }
+    this.next();
+  }
 });
 
 Router.route('/play', {
+  name: 'play',
   template: 'play'
 });
 
@@ -16,5 +24,6 @@ Router.route('/game', {
 });
 
 Router.route('/create', {
+  name: 'create',
   template: 'create'
 });

@@ -2,7 +2,11 @@
   <header>
     <nav class="navbar__play">
       <ul class="navbar__elements">
-        <li><button class="navbar__button"><a href="">Play Now</a></button></li>
+        {{#if currentUser}}
+          <li><a href="{{pathFor route='create'}}" class="btn navbar__button">Create Game</a></li>
+        {{else}}
+          <li><a href="{{pathFor route='join'}}" class="btn navbar__button">Play Now</a></li>
+        {{/if}}
         <li><a class="navbar__about" href="#">About</a></li>
       </ul>
     </nav>
