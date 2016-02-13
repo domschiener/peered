@@ -57,8 +57,7 @@
   border: 2px solid #ccc;
 }
 
-#tictactoe,
-#rockpaperscissor {
+.option_input {
   position: relative;
   width: 0 !important;
 }

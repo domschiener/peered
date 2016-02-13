@@ -1,0 +1,170 @@
+<template name="games">
+  <header>
+    <nav class="navbar__play">
+      <ul class="navbar__elements">
+        {{#if currentUser}}
+          <li><a href="{{pathFor route='create'}}" class="btn navbar__button">Create Game</a></li>
+        {{else}}
+          <li><a href="{{pathFor route='join'}}" class="btn navbar__button">Play Now</a></li>
+        {{/if}}
+        <li><a class="navbar__about" href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="games">
+    <div class="container">
+      <div class="games__select col-xs-3">
+        <h1 class="select__title">View Options</h1>
+        <ul class="select__option">
+          <li data-text="all">All</li>
+          <li data-text="bets">With Bets</li>
+          <li data-text="nobets">No Bets</li>
+        </ul>
+      </div>
+      <div class="games__list col-xs-9">
+        <h1 class="games__title">Available Players: <strong>15</strong></h1>
+        <div class="gamer__profile container dark_purple col-xs-3">
+          <!-- Hover Div -->
+          <div class="gamer__hover">
+            <p class="gamer__hover-title">Do you want to challenge <u>Dominik Schiener</u>?</p>
+            <button class="btn btn-success accept_challenge">Accept Challenge</button>
+          </div>
+          <!-- -->
+          <div class="gamer__picture">
+            <img src="/picture.jpg" />
+          </div>
+          <div class="gamer__info">
+            <p class="gamer__name">Dominik Schiener</p>
+          </div>
+          <div class="row gamer__footer">
+            <div class="gamer__bet col-xs-4">
+              <p class="gamer__title">Bet</p>
+              <p class="gamer__subtitle">$ 0</p>
+            </div>
+            <div class="gamer__grid col-xs-4">
+              <p class="gamer__title">Grid</p>
+              <p class="gamer__subtitle">4 x 4</p>
+            </div>
+            <div class="gamer__right col-xs-4">
+              <p class="gamer__title">Online</p>
+              <div class="online"></div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="gamer__profile container dark_green col-xs-3">
+          <div class="gamer__picture">
+            <img src="/picture.jpg" />
+          </div>
+          <div class="gamer__info">
+            <p class="gamer__name">Dominik Schiener</p>
+          </div>
+          <div class="row gamer__footer">
+            <div class="gamer__bet col-xs-4">
+              <p class="gamer__title">Bet</p>
+              <p class="gamer__subtitle">$ 0</p>
+            </div>
+            <div class="gamer__grid col-xs-4">
+              <p class="gamer__title">Grid</p>
+              <p class="gamer__subtitle">4 x 4</p>
+            </div>
+            <div class="gamer__right col-xs-4">
+              <p class="gamer__title">Online</p>
+              <div class="online"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gamer__profile container crazy col-xs-3">
+          <div class="gamer__picture">
+            <img src="/picture.jpg" />
+          </div>
+          <div class="gamer__info">
+            <p class="gamer__name">Dominik Schiener</p>
+          </div>
+          <div class="row gamer__footer">
+            <div class="gamer__bet col-xs-4">
+              <p class="gamer__title">Bet</p>
+              <p class="gamer__subtitle">$ 0</p>
+            </div>
+            <div class="gamer__grid col-xs-4">
+              <p class="gamer__title">Grid</p>
+              <p class="gamer__subtitle">4 x 4</p>
+            </div>
+            <div class="gamer__right col-xs-4">
+              <p class="gamer__title">Online</p>
+              <div class="online"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gamer__profile container crazy_2 col-xs-3">
+          <div class="gamer__picture">
+            <img src="/picture.jpg" />
+          </div>
+          <div class="gamer__info">
+            <p class="gamer__name">Dominik Schiener</p>
+          </div>
+          <div class="row gamer__footer">
+            <div class="gamer__bet col-xs-4">
+              <p class="gamer__title">Bet</p>
+              <p class="gamer__subtitle">$ 0</p>
+            </div>
+            <div class="gamer__grid col-xs-4">
+              <p class="gamer__title">Grid</p>
+              <p class="gamer__subtitle">4 x 4</p>
+            </div>
+            <div class="gamer__right col-xs-4">
+              <p class="gamer__title">Online</p>
+              <div class="online"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gamer__profile container light_blue col-xs-3">
+          <div class="gamer__picture">
+            <img src="/picture.jpg" />
+          </div>
+          <div class="gamer__info">
+            <p class="gamer__name">Dominik Schiener</p>
+          </div>
+          <div class="row gamer__footer">
+            <div class="gamer__bet col-xs-4">
+              <p class="gamer__title">Bet</p>
+              <p class="gamer__subtitle">$ 0</p>
+            </div>
+            <div class="gamer__grid col-xs-4">
+              <p class="gamer__title">Grid</p>
+              <p class="gamer__subtitle">4 x 4</p>
+            </div>
+            <div class="gamer__right col-xs-4">
+              <p class="gamer__title">Online</p>
+              <div class="online"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gamer__profile container purple col-xs-3">
+          <div class="gamer__picture">
+            <img src="/picture.jpg" />
+          </div>
+          <div class="gamer__info">
+            <p class="gamer__name">Dominik Schiener</p>
+          </div>
+          <div class="row gamer__footer">
+            <div class="gamer__bet col-xs-4">
+              <p class="gamer__title">Bet</p>
+              <p class="gamer__subtitle">$ 0</p>
+            </div>
+            <div class="gamer__grid col-xs-4">
+              <p class="gamer__title">Grid</p>
+              <p class="gamer__subtitle">4 x 4</p>
+            </div>
+            <div class="gamer__right col-xs-4">
+              <p class="gamer__title">Online</p>
+              <div class="online"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

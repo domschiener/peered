@@ -1,7 +1,14 @@
 var key = Meteor.settings.public.peerjs_key;
 
-peer = new Peer({key: "ce8zkrdhyj51xlxr"});
+peerSetup = function() {
+  var user = Meteor.userId();
+  peer = new Peer(user, {key: "ce8zkrdhyj51xlxr"});
 
-peer.on('error', function(err) {
-  console.log(err);
-});
+  peer.on('open', function(id) {
+    console.log("Success! Your Peer ID is:" + id);
+  });
+}
+
+Accounts.onLogin(function() {
+  peerSetup();
+})

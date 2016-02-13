@@ -20,7 +20,9 @@ Template.create.rendered = function() {
 Template.create.events({
   'click #submitGame': function() {
     var newGame = {};
-    var tictactoe = $("#tictactoe:checked").val();
+    newGame['creator'] = Meteor.userId();
+
+    var tictactoe = $("#tictac:checked").val();
     newGame['type'];
     // Get user chosen game
     if (tictactoe) {

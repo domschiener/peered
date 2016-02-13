@@ -8,7 +8,7 @@ Router.route('/join', {
   template: 'join',
   onBeforeAction: function() {
     if (Meteor.user()) {
-      Router.go('play');
+      Router.go('games');
     }
     this.next();
   }

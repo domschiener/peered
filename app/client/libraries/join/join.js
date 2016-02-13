@@ -4,7 +4,10 @@ Template.join.events({
   },
   'click .github_login' : function() {
     Meteor.loginWithGithub({loginStyle: "redirect"}, function(error, success) {
-      console.log(success);
+      console.log("§tas");
+      if (!error) {
+        peerSetup();
+      }
     });
   }
 })
