@@ -1,3 +1,0 @@
-Template.games.rendered = function() {
-
-}

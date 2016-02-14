@@ -16,15 +16,31 @@ Router.route('/join', {
 
 Router.route('/games', {
   name: 'games',
-  template: 'games'
+  template: 'games',
+  data: function() {
+    var activeGames = Games.find({'game.open': true}, {sort: {createdAt: -1}}).fetch();
+    return {'games': activeGames};
+  }
 });
 
-Router.route('/play', {
+Router.route('/play/:_id', {
   name: 'play',
-  template: 'play'
+  template: 'play',
+  onBeforeAction: function() {
+    if (!Meteor.userId()) {
+      Router.go('join');
+    }
+    this.next();
+  }
 });
 
 Router.route('/create', {
   name: 'create',
-  template: 'create'
+  template: 'create',
+  onBeforeAction: function() {
+    if (!Meteor.userId()) {
+      Router.go('join');
+    }
+    this.next();
+  }
 });

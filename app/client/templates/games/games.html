@@ -1,0 +1,93 @@
+<template name="games">
+  <header>
+    <nav class="navbar__play">
+      <ul class="navbar__elements">
+        {{#if currentUser}}
+          <li><a href="{{pathFor route='create'}}" class="btn navbar__button">Create Game</a></li>
+        {{else}}
+          <li><a href="{{pathFor route='join'}}" class="btn navbar__button">Play Now</a></li>
+        {{/if}}
+        <li><a class="navbar__about" href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="games">
+    <div class="container">
+      <div class="games__select col-xs-3">
+        <h1 class="select__title">View Options</h1>
+        <ul class="select__option">
+          <li data-text="all">All</li>
+          <li data-text="bets">With Bets</li>
+          <li data-text="nobets">No Bets</li>
+        </ul>
+      </div>
+      <!-- If the user has open games, display them at the top -->
+      {{#if currentUser.games}}
+        <div class="games__list col-xs-9">
+          <h1 class="games__title">Your Open Games</h1>
+          <!-- For each game, generat a tile -->
+          {{#each gameData currentUser.games}}
+            <div class="gamer__profile container {{randomColor}} col-xs-3">
+              <div class="gamer__picture">
+                <img src="/picture.jpg" />
+              </div>
+              <div class="gamer__info">
+                <p class="gamer__name">{{this.game.creator}}</p>
+              </div>
+              <div class="row gamer__footer">
+                <div class="gamer__bet col-xs-6">
+                  <p class="gamer__title">Bet</p>
+                  <p class="gamer__subtitle">$ {{this.game.value}}</p>
+                </div>
+                <div class="gamer__grid col-xs-6">
+                  <p class="gamer__title">Game</p>
+                  <p class="gamer__subtitle">{{this.game.type}}</p>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+      <!-- -->
+
+      <!-- Constructor for all available games -->
+
+      <div class="games__list col-xs-9">
+        <h1 class="games__title">Available Games: <strong>15</strong></h1>
+        {{#each games}}
+          {{#if notOwner currentUser._id this.game.peer}}
+            <div class="gamer__profile container {{randomColor}} col-xs-3">
+              <!-- Hover Div -->
+              <div class="gamer__hover">
+                <p class="gamer__hover-title">Do you want to challenge <u>{{this.game.creator}}</u>?</p>
+                <a href="{{pathFor route='play'}}" class="btn btn-success accept_challenge">Accept Challenge</a>
+              </div>
+              <!-- -->
+              <div class="gamer__picture">
+                <img src="/picture.jpg" />
+              </div>
+              <div class="gamer__info">
+                <p class="gamer__name">{{this.game.creator}}</p>
+              </div>
+              <div class="row gamer__footer">
+                <div class="gamer__bet col-xs-6">
+                  <p class="gamer__title">Bet</p>
+                  <p class="gamer__subtitle">$ {{this.game.value}}</p>
+                </div>
+                <div class="gamer__grid col-xs-6">
+                  <p class="gamer__title">Game</p>
+                  <p class="gamer__subtitle">{{this.game.type}}</p>
+                </div>
+                <!-- <div class="gamer__right col-xs-4">
+                  <p class="gamer__title">Online</p>
+                  <div class="online"></div>
+                </div> -->
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+      <!-- End of Constructor -->
+    </div>
+  </section>
+</template>

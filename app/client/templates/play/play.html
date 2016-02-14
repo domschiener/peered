@@ -8,52 +8,36 @@
     </nav>
   </header>
   <section class="game__section">
-    <!-- Created by Michael Mammoliti -->
-    <div id='wrapper'>
-      <div id='ui'>
-        <div class='player'>
-          <img class="top_image" src='/images/cross.png' />
-          <div class='name right'>
-            <img class="name_picture" src="/picture.jpg" />
-            <p>Dominik Schiener</p>
+    <div class="container">
+      <div class="game_notready demo-3">
+        <p class="notready__title">Waiting for Players to Join...</p>
+        <div class="row">
+          <div class="col-xs-6 vote_why">
+            <p class="notready__desc">We are currently waiting for a Player that wants to take on the challenge and play against you. As soon as someone wants to join, you will see the player appear on the right side. You can then either approve or reject the player.</p>
           </div>
-        </div>
-        <div id='points'>0 - 0</div>
-        <div class='player'>
-          <img class="top_image" src='/images/circle.png' />
-          <div class='name'>
-            <p>Dominik Schiener</p>
-            <img class="name_picture" src="/picture.jpg" />
+          <div class="col-xs-6 vote_send">
+            <div class="waitingPlayers"></div>
+            <ul class="loadingCircle">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
           </div>
-        </div>
-      </div> <!--  ui -->
-
-      <div id='tictactoe'>
-        <ul>
-          <li><button id='cell-1' class='cell'>&nbsp;</button></li>
-          <li><button id='cell-2' class='cell'>&nbsp;</button></li>
-          <li><button id='cell-3' class='cell'>&nbsp;</button></li>
-
-          <li><button id='cell-4' class='cell'>&nbsp;</button></li>
-          <li><button id='cell-5' class='cell'>&nbsp;</button></li>
-          <li><button id='cell-6' class='cell'>&nbsp;</button></li>
-
-          <li><button id='cell-7' class='cell'>&nbsp;</button></li>
-          <li><button id='cell-8' class='cell player-1 checked'>&nbsp;</button></li>
-          <li><button id='cell-9' class='cell player-0 checked'>&nbsp;</button></li>
-        </ul>
-      </div> <!--  tictactoe -->
-    </div>  <!--  wrapper -->
-
-    <div class='hoverdiv hidden'>
-      <div id='actions'>
-        <p class='big text-center'>&nbsp;</p>
-
-        <div id='controls'>
-          <button id='newround'>NEW ROUND</button>
-          <button id='newgame'>NEW GAME</button>
         </div>
       </div>
-    </div>  <!--  hoverdiv -->
+    </div>
+
+
+
+
+
+
+
+    <!-- {{if !this.open}}
+
+    {{else}}
+      {{> tictactoe}}
+    {{/else}} -->
   </section>
 </template>

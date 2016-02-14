@@ -20,28 +20,44 @@ Template.create.rendered = function() {
 Template.create.events({
   'click #submitGame': function() {
     var newGame = {};
-    newGame['creator'] = Meteor.userId();
+    newGame['creator'] = Meteor.user().profile.name;
+    newGame['peer'] = peer.id;
+
+    if (!newGame['peer']) {
+      // If user is currently not connected, we try to reconnect
+      var peerID = peerSetup();
+      if (peerID) {
+        newGame['peer'] = peerID;
+      }
+      else {
+        return false;
+      }
+    }
+
+    newGame['open'] = true;
 
     var tictactoe = $("#tictac:checked").val();
     newGame['type'];
     // Get user chosen game
     if (tictactoe) {
-      newGame['type'] = 'tictactoe';
+      newGame['type'] = 'TicTacToe';
     }
     else {
-      newGame['type'] = 'rockpaperscissor';
+      newGame['type'] = 'RockPaperScissor';
     }
 
     newGame['privateGame'] = $('.private_game').bootstrapSwitch('state');
 
     newGame['betting'] = $('.betswitch').bootstrapSwitch('state');
+    newGame['value'] = 0;
     // If the user wants to bet, get value
     if (newGame['betting']) {
       newGame['value'] = $('.ether_amount').val();
     }
     Meteor.call('newGame', newGame, function(error, success) {
       if (!error) {
-        Router.go()
+        var route = '/play/' + success;
+        Router.go(route);
       }
     })
   }
