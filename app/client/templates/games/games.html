@@ -26,27 +26,30 @@
         <div class="games__list col-xs-9">
           <h1 class="games__title">Your Open Games</h1>
           <!-- For each game, generat a tile -->
-          {{#each gameData currentUser.games}}
-            <div class="gamer__profile container {{randomColor}} col-xs-3">
-              <div class="gamer__picture">
-                <img src="/picture.jpg" />
-              </div>
-              <div class="gamer__info">
-                <p class="gamer__name">{{this.game.creator}}</p>
-              </div>
-              <div class="row gamer__footer">
-                <div class="gamer__bet col-xs-6">
-                  <p class="gamer__title">Bet</p>
-                  <p class="gamer__subtitle">$ {{this.game.value}}</p>
+          {{#each currentUser.games}}
+            {{#with gameData this}}
+              <div class="gamer__profile container {{randomColor}} col-xs-3">
+                <div class="gamer__picture">
+                  <img src="/picture.jpg" />
                 </div>
-                <div class="gamer__grid col-xs-6">
-                  <p class="gamer__title">Game</p>
-                  <p class="gamer__subtitle">{{this.game.type}}</p>
+                <div class="gamer__info">
+                  <p class="gamer__name">{{this.game.creator}}</p>
+                </div>
+                <div class="row gamer__footer">
+                  <div class="gamer__bet col-xs-6">
+                    <p class="gamer__title">Bet</p>
+                    <p class="gamer__subtitle">$ {{this.game.value}}</p>
+                  </div>
+                  <div class="gamer__grid col-xs-6">
+                    <p class="gamer__title">Game</p>
+                    <p class="gamer__subtitle">{{this.game.type}}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            {{/with}}
           {{/each}}
         </div>
+        <div class="col-xs-3"></div>
       {{/if}}
       <!-- -->
 
@@ -60,7 +63,7 @@
               <!-- Hover Div -->
               <div class="gamer__hover">
                 <p class="gamer__hover-title">Do you want to challenge <u>{{this.game.creator}}</u>?</p>
-                <a href="{{pathFor route='play'}}" class="btn btn-success accept_challenge">Accept Challenge</a>
+                <a href="{{pathFor route='play'}}" type="button" class="btn btn-success accept_challenge">Accept Challenge</a>
               </div>
               <!-- -->
               <div class="gamer__picture">

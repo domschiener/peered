@@ -5,3 +5,8 @@ This is P2P TicTacToe Game that makes it possible for peers to bet with each oth
 Powered by WebRTC and Ethereum
 
 Coming soon.
+
+After 3 failed attempts, quit the game and place it as inactive 
+
+Credit
+http://uigradients.com/

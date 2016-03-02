@@ -5,11 +5,16 @@ peerSetup = function() {
   peer = new Peer(user, {key: "czdh4a0vqplj714i"});
 
   peer.on('open', function(id) {
-    console.log("Success! Your Peer ID is:" + id);
+    console.log("Success! Your Peer ID is: " + id);
     return id;
   });
+
+  peer.on('connection', function(conn) {
+
+  })
+
   peer.on('error', function(error) {
-    $('header').append('<div class="alert alert-danger peerError"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>ERROR!</strong>' + error.message + ' </div>')
+    $('header').append('<div class="alert alert-danger peerError"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>ERROR! </strong>' + error.message + ' </div>')
     return false;
   })
 }

@@ -1,7 +1,3 @@
-Template.games.rendered = function() {
-
-}
-
 Template.games.helpers({
   gameData: function(gameID) {
     return Games.findOne({_id: gameID});

@@ -25,6 +25,7 @@
 
 .games__select {
   margin: 50px 0;
+  min-height: 100%;
   text-align: right;
   border-right: 4px solid #FF880D;
 }
@@ -82,6 +83,10 @@
 
 .accept_challenge {
   margin-top: 15px;
+}
+
+.accept_challenge:hover {
+  color: #fff !important;
 }
 
 .gamer__profile:hover > .gamer__hover {
@@ -164,7 +169,7 @@
   background: linear-gradient(to left, #f857a6 , #ff5858);
 }
 
-.crazy_2 {
+.crazy2 {
   background: #5f2c82;
   background: -webkit-linear-gradient(to left, #5f2c82 , #49a09d);
   background: linear-gradient(to left, #5f2c82 , #49a09d);

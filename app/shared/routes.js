@@ -14,6 +14,17 @@ Router.route('/join', {
   }
 });
 
+Router.route('/create', {
+  name: 'create',
+  template: 'create',
+  onBeforeAction: function() {
+    if (!Meteor.userId()) {
+      Router.go('join');
+    }
+    this.next();
+  }
+});
+
 Router.route('/games', {
   name: 'games',
   template: 'games',
@@ -30,17 +41,19 @@ Router.route('/play/:_id', {
     if (!Meteor.userId()) {
       Router.go('join');
     }
+
     this.next();
   }
 });
 
-Router.route('/create', {
-  name: 'create',
-  template: 'create',
+Router.route('/loading/:_id', {
+  name: 'loading',
+  template: 'loading',
   onBeforeAction: function() {
     if (!Meteor.userId()) {
       Router.go('join');
     }
+
     this.next();
   }
 });

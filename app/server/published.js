@@ -1,4 +1,5 @@
 Meteor.publish('gameListings', function() {
+  //TODO Only return public games
   return Games.find({});
 });
 
