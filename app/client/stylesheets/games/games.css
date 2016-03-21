@@ -73,12 +73,23 @@
   z-index: 1000;
   background-color: #3B465A;
   visibility: hidden;
+
+  display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+  flex-direction: column;
+
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+
+	align-items: center;
+  justify-content: center;
 }
 
 .gamer__hover-title {
   font-size: 20px;
   color: #fff;
-  margin-top: 25px;
 }
 
 .accept_challenge {

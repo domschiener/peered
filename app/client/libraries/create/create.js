@@ -26,7 +26,7 @@ Template.create.events({
       newGame['creator'] = creator.services.github.username;
     newGame['peer'] = creator._id;
 
-    newGame['open'] = true;
+    newGame['ready'] = false;
 
     var tictactoe = $("#tictac:checked").val();
     newGame['type'];
@@ -38,7 +38,7 @@ Template.create.events({
       newGame['type'] = 'RockPaperScissor';
     }
 
-    newGame['privateGame'] = $('.private_game').bootstrapSwitch('state');
+    newGame['open'] = $('.private_game').bootstrapSwitch('state');
 
     newGame['betting'] = $('.betswitch').bootstrapSwitch('state');
     newGame['value'] = 0;

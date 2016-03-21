@@ -49,6 +49,10 @@ Router.route('/play/:_id', {
 Router.route('/loading/:_id', {
   name: 'loading',
   template: 'loading',
+  data: function() {
+    var activeGames = Games.findOne({_id: this.params._id});
+    return {'games': activeGames};
+  },
   onBeforeAction: function() {
     if (!Meteor.userId()) {
       Router.go('join');

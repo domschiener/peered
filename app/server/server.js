@@ -9,5 +9,8 @@ Meteor.methods({
         return success
       }
     });
+  },
+  makeGameLive: function(gameID) {
+    Games.update({_id: gameID}, {$set: {'game.ready': true}})
   }
 })

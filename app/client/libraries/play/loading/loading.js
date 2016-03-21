@@ -1,5 +1,9 @@
-Template.loading.rendered = function() {
+Template.loading.onRendered(function() {
   var currentUser = peerSetup();
-  console.log(currentUser);
 
-}
+  if (currentUser) {
+    console.log(currentUser);
+    // GamesData.insert({'hello': 'littletesxt'});
+    // var connection = peer.connect(peerGamer, gameID);
+  }
+})
