@@ -20,19 +20,11 @@ Template.create.rendered = function() {
 Template.create.events({
   'click #submitGame': function() {
     var newGame = {};
-    newGame['creator'] = Meteor.user().profile.name;
-    newGame['peer'] = peer.id;
-
-    if (!newGame['peer']) {
-      // If user is currently not connected, we try to reconnect
-      var peerID = peerSetup();
-      if (peerID) {
-        newGame['peer'] = peerID;
-      }
-      else {
-        return false;
-      }
-    }
+    var creator = Meteor.user()
+    newGame['creator'] = creator.profile.name;
+    if (!newGame['creator'])
+      newGame['creator'] = creator.services.github.username;
+    newGame['peer'] = creator._id;
 
     newGame['open'] = true;
 

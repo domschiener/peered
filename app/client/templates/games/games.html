@@ -25,10 +25,15 @@
       {{#if currentUser.games}}
         <div class="games__list col-xs-9">
           <h1 class="games__title">Your Open Games</h1>
-          <!-- For each game, generat a tile -->
+          <!-- For each game, generate a tile -->
           {{#each currentUser.games}}
             {{#with gameData this}}
               <div class="gamer__profile container {{randomColor}} col-xs-3">
+                <!-- Hover Div -->
+                <div class="gamer__hover">
+                  <a href="{{pathFor route='play'}}" type="button" class="btn btn-success accept_challenge">Go to Game</a>
+                </div>
+                <!-- -->
                 <div class="gamer__picture">
                   <img src="/picture.jpg" />
                 </div>

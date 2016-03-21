@@ -4,6 +4,11 @@ peerSetup = function() {
   var user = Meteor.userId();
   peer = new Peer(user, {key: "czdh4a0vqplj714i"});
 
+  if (peer.id) {
+    console.log("here")
+    return peer.id;
+  }
+
   peer.on('open', function(id) {
     console.log("Success! Your Peer ID is: " + id);
     return id;
