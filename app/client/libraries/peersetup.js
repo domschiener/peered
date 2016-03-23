@@ -1,9 +1,11 @@
 var key = Meteor.settings.public.peerjs_key;
-var isPeerReady = false;
+peer = false;
 
-peerSetup = function() {
-  if (isPeerReady) {
-    return peer.id;
+peerSetup = function(cb) {
+  'use strict';
+
+  if (peer) {
+    cb(peer.id);
   }
 
   var user = Meteor.userId();
@@ -11,27 +13,36 @@ peerSetup = function() {
 
   peer.on('open', function(id) {
     console.log("Success! Your Peer ID is: " + id);
-    isPeerReady = true;
-    return id;
+    cb(id);
   });
 
   peer.on('connection', function(conn) {
     var game = conn.label;
     var opponent = conn.peer;
-    GamesData.insert({_id: game, 'opponent': opponent}, function(error, success) {
-      if (!error) {
-        Meteor.call('makeGameLive', game)
-      }
-    });
+
+    conn.on('close', function() {
+      console.log(conn, "closed");
+    })
+
+    // GamesData.insert({_id: game, 'opponent': opponent}, function(error, success) {
+    //   if (!error) {
+    //     Meteor.call('makeGameLive', game)
+    //   }
+    // });
   });
 
+
+  //
+  //  Central dispatcher for peer based error messages
+  //
   peer.on('error', function(error) {
+    
+    console.log(error.type);
     $('header').append('<div class="alert alert-danger peerError"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>ERROR! </strong>' + error.message + '. Try reloading the page. </div>');
-    isPeerReady = false;
-    return false;
+    cb(false);
   });
 }
 
-Accounts.onLogin(function() {
-  peerSetup();
-})
+// Accounts.onLogin(function() {
+//   peerSetup();
+// })

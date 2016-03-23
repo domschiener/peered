@@ -39,10 +39,11 @@ Router.route('/play/:_id', {
   template: 'play',
   onBeforeAction: function() {
     if (!Meteor.userId()) {
-      Router.go('join');
+      this.render('join');
     }
-
-    this.next();
+    else {
+      this.next();
+    }
   }
 });
 
@@ -50,8 +51,8 @@ Router.route('/loading/:_id', {
   name: 'loading',
   template: 'loading',
   data: function() {
-    var activeGames = Games.findOne({_id: this.params._id});
-    return {'games': activeGames};
+    var thisGame = Games.findOne({_id: this.params._id});
+    return {'game': thisGame};
   },
   onBeforeAction: function() {
     if (!Meteor.userId()) {

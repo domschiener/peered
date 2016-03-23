@@ -1,9 +1,22 @@
 Template.loading.onRendered(function() {
-  var currentUser = peerSetup();
+  var gameID = this.data.game._id;
+  var opponent = this.data.game.game.peer;
 
-  if (currentUser) {
-    console.log(currentUser);
-    // GamesData.insert({'hello': 'littletesxt'});
-    // var connection = peer.connect(peerGamer, gameID);
-  }
+  peerSetup(function(peerID) {
+    if (peerID) {
+      var conn = peer.connect(opponent, gameID);
+
+      conn.on('open', function() {
+        GamesData.insert({_id: gameID, 'opponent': opponent});
+        // Receive messages
+        console.log(conn);
+        conn.on('data', function(data) {
+          console.log('Received', data);
+        });
+
+        // Send messages
+        conn.send('Hello!');
+      });
+    }
+  })
 })

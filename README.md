@@ -6,7 +6,9 @@ Powered by WebRTC and Ethereum
 
 Coming soon.
 
-After 3 failed attempts, quit the game and place it as inactive 
+After 3 failed attempts, quit the game and place it as inactive
 
 Credit
 http://uigradients.com/
+
+- think more about how to make it possible for a gamer to easily reconnect after being disconnected or for example reloading the page
