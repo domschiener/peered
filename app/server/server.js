@@ -10,7 +10,10 @@ Meteor.methods({
       }
     });
   },
+  addGameToUser: function(game, user) {
+    return Meteor.users.update({_id: user}, {$push: {'games': game}});
+  },
   makeGameLive: function(gameID) {
-    Games.update({_id: gameID}, {$set: {'game.ready': true}})
+    return Games.update({_id: gameID}, {$set: {'game.ready': true}})
   }
 })

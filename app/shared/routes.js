@@ -37,12 +37,29 @@ Router.route('/games', {
 Router.route('/play/:_id', {
   name: 'play',
   template: 'play',
+  waitOn: function() {
+    return Meteor.subscribe('gameListings');
+  },
+  data: function() {
+    return Games.findOne({_id: this.params._id});
+  },
   onBeforeAction: function() {
     if (!Meteor.userId()) {
       this.render('join');
     }
     else {
-      this.next();
+      if (!Meteor.user()['games']) {
+        this.render('loading');
+        return
+      }
+
+      // If the user is part of the game, continue, else render loading
+      if (Meteor.user()['games'].indexOf(this.params._id) > -1) {
+        this.next();
+      }
+      else {
+        this.render('loading');
+      }
     }
   }
 });
@@ -50,9 +67,11 @@ Router.route('/play/:_id', {
 Router.route('/loading/:_id', {
   name: 'loading',
   template: 'loading',
+  waitOn: function() {
+    return Meteor.subscribe('gameListings');
+  },
   data: function() {
-    var thisGame = Games.findOne({_id: this.params._id});
-    return {'game': thisGame};
+    return Games.findOne({_id: this.params._id});
   },
   onBeforeAction: function() {
     if (!Meteor.userId()) {

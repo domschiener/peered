@@ -1,5 +1,9 @@
 Template.play.rendered = function() {
-  var currentUser = peerSetup();
+  peerSetup(function(peerID) {
+    if (peerID) {
+      
+    }
+  })
 }
 
 Template.play.events({
@@ -21,7 +25,7 @@ function illegalMove(move, gameID) {
   if (move.length !== 6)
     return false;
 
-  //if 
+  //if
 
   var allMoves = GamesDate.findOne({_id: gameID}).moves;
 
