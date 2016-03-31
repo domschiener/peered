@@ -7,6 +7,12 @@
       </ul>
     </nav>
   </header>
+
+  {{> Template.dynamic template=landing}}
+  {{> Template.dynamic template=what}}
+</template>
+
+<template name="landing">
   <section class="landing__section">
     <div class="landing__content">
       <h2 class="landing__subtitle">TicTacToe powered by WebRTC and Ethereum</h2>
@@ -14,6 +20,9 @@
       <h2 class="landing__subtitle">Challenge your Friends, completely Player-to-Player</h2>
     </div>
   </section>
+</template>
+
+<template name="what">
   <section class="what__section">
     <div class="what__header">
       <h1 class="what__title">What is Peered?</h1>
@@ -22,19 +31,9 @@
     <div class="what__gamer"></div>
     <div class="what__content">
       <div class="what__webrtc col-xs-6">
-
+        <h1>Hello</h1>
       </div>
       <div class="what__ethereum col-xs-6"></div>
     </div>
-  </section>
-  <!-- <section class="testimonial__section">
-    <h1 class="testimonial__title">What Gamers are Saying</h1>
-    <div class="container testimonial__reviews">
-      <div class="testimonial__reviewer"></div>
-      <div class="testimonial__reviewer"></div>
-    </div>
-  </section> -->
-  <section class="play__section">
-    accept deny button
   </section>
 </template>

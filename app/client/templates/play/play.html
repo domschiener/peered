@@ -8,30 +8,15 @@
     </nav>
   </header>
   <section class="game__section">
-    <!-- <div class="container">
-      <div class="game_notready demo-3">
-        <p class="notready__title">Waiting for Players to Join...</p>
-        <div class="row">
-          <div class="col-xs-6 vote_why">
-            <p class="notready__desc">We are currently waiting for a Player that wants to take on the challenge and play against you. As soon as someone wants to join, you will see the player appear on the right side. You can then either approve or reject the player.</p>
-          </div>
-          <div class="col-xs-6 vote_send">
-            <div class="waitingPlayers"></div>
-            <ul class="loadingCircle">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    {{> tictactoe}}
+    {{#if isActiveGame currentUser.games}}
+      {{> tictactoe}}
+    {{else}}
+      {{> loading}}
+    {{/if}}
     <!-- {{if !this.open}}
 
     {{else}}
-      {{> tictactoe}}
+
     {{/else}} -->
   </section>
 </template>

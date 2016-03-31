@@ -10,7 +10,8 @@
 }
 
 body,
-html {
+html,
+#__blaze-root {
   font-family: 'Raleway', sans-serif;
   height: 100%;
   width: 100%;

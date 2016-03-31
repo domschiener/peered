@@ -1,10 +1,25 @@
-Template.play.rendered = function() {
+Template.play.onCreated(function() {
+  var self = this;
+  self.autorun(function() {
+    var thisGame = FlowRouter.getParam('_id');
+    self.subscribe('singleGame', thisGame);
+  });
+
   peerSetup(function(peerID) {
-    if (peerID) {
-      
-    }
+    console.log("You're successfully connected again");
   })
-}
+});
+
+Template.play.helpers({
+  game: function() {
+    var thisGame = FlowRouter.getParam('_id');
+    return Games.findOne({_id: thisGame});
+  },
+  isActiveGame: function(userGames) {
+    var thisGame = FlowRouter.getParam('_id');
+    return userGames.indexOf(thisGame) > -1;
+  }
+})
 
 Template.play.events({
   'click .cell': function(event) {

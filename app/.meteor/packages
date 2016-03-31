@@ -20,4 +20,5 @@ service-configuration
 accounts-github
 standard-minifier-css
 standard-minifier-js
-iron:router
+kadira:blaze-layout
+kadira:flow-router

@@ -49,7 +49,7 @@ Template.create.events({
     Meteor.call('newGame', newGame, function(error, success) {
       if (!error) {
         var route = '/play/' + success;
-        Router.go(route);
+        FlowRouter.go(route);
       }
     })
   }

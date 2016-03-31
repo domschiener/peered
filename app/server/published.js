@@ -3,6 +3,11 @@ Meteor.publish('gameListings', function() {
   return Games.find({});
 });
 
+Meteor.publish('thisGame', function(gameId) {
+  //TODO Only return public games
+  return Games.findOne({_id: gameId});
+});
+
 Meteor.publish("userData", function () {
   if (this.userId) {
     return Meteor.users.find({_id: this.userId}, {'services': 1});
