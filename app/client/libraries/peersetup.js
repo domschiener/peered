@@ -18,13 +18,14 @@ peerSetup = function(cb) {
 
   // When we receive an incoming connection, insert the data into a local collection
   peer.on('connection', function(conn) {
+    // If the connection is for reconnecting, abort
     if (conn.metadata === "reconnect") {
       return
     }
 
     var game = conn.label;
     var opponent = conn.peer;
-
+    console.log("Received new connection", opponent);
     GamesData.insert({_id: game, 'opponent': opponent}, function(error, success) {
       if (!error) {
         Meteor.call('makeGameLive', game, opponent)

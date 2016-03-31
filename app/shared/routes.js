@@ -49,7 +49,7 @@ Router.route('/play/:_id', {
     }
     else {
       if (!Meteor.user()['games']) {
-        this.render('loading');
+        Router.go('loading', {_id: this.params._id})
         return
       }
 
@@ -58,7 +58,7 @@ Router.route('/play/:_id', {
         this.next();
       }
       else {
-        this.render('loading');
+        Router.go('loading', {_id: this.params._id})
       }
     }
   }

@@ -13,6 +13,7 @@ Template.loading.onRendered(function() {
             // We add the game to the user's games collection
             Meteor.call('addGameToUser', gameID, Meteor.userId(), function(err, succ) {
               if (!err) {
+                //this.render('play')
                 Router.go('play', {_id: gameID});
               }
             })
