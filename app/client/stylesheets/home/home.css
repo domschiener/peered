@@ -146,7 +146,7 @@ a:active {
   color: #FFBA33;
   text-align: center;
   letter-spacing: 5px;
-  margin: 15% auto;
+  margin: 10% auto;
   left: 0;
   right: 0;
   width: 60%;
@@ -156,7 +156,8 @@ a:active {
   font-size: 100px;
   font-weight: 500;
   line-height: 100px;
-  text-transform: uppercase;
+  margin: 40px 0;
+  /*text-transform: uppercase;*/
 }
 
 

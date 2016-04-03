@@ -1,6 +1,6 @@
 Template.loading.onRendered(function() {
-  var gameID = this.data._id;
-  var opponent = this.data.game.peer;
+  var gameID =  FlowRouter.getParam('_id');
+  var opponent = Games.findOne({_id: gameID}).game.peer;
 
   peerSetup(function(peerID) {
     if (peerID) {
@@ -13,15 +13,11 @@ Template.loading.onRendered(function() {
             // We add the game to the user's games collection
             Meteor.call('addGameToUser', gameID, Meteor.userId(), function(err, succ) {
               if (!err) {
-                //this.render('play')
-                Router.go('play', {_id: gameID});
+                console.log("Successfully connected to game: ", gameID);
               }
             })
           }
         });
-
-        // Send messages
-        conn.send('Hello!');
       });
     }
   })
