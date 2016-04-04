@@ -35,21 +35,64 @@ Template.tictactoe.events({
 })
 
 function hasPlayerWon(gameMove, playerMoves) {
-  var possibilities   = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9],
+  //
+  // TODO: Find a better way to determine the winner
+  //  This is pretty inefficient
+  //
+  var possibilities = {
+    0: {
+      combo: [1,2,3],
+      found: 0
+    },
+    1: {
+      combo: [4,5,6],
+      found: 0
+    },
+    2: {
+      combo: [7,8,9],
+      found: 0
+    },
+    3: {
+      combo: [1,4,7],
+      found: 0
+    },
+    4: {
+      combo: [2,5,8],
+      found: 0
+    },
+    5: {
+      combo: [3,6,9],
+      found: 0
+    },
+    6: {
+      combo: [1,5,9],
+      found: 0
+    },
+    7: {
+      combo: [3,5,7],
+      found: 0
+    }
+  }
 
-    [1,4,7],
-    [2,5,8],
-    [3,6,9],
+  var newMove = parseInt(gameMove[5]);
+  playerMoves.push(newMove);
 
-    [1,5,9],
-    [3,5,7]
-  ];
+  if (playerMoves < 3)
+    return false;
 
-  // First order the game moves by size
+  var playerWon = false;
+  playerMoves.forEach(function(el) {
+    for (var i = 0; i < 8; i++) {
+      if (possibilities[i].combo.indexOf(el) > -1) {
+        possibilities[i].found += 1;
 
+        if (possibilities[i].found === 3) {
+          playerWon = true;
+        }
+      }
+    }
+  });
+  return playerWon;
 }
 
 function illegalMove(gameMove, gamesData) {
@@ -62,14 +105,22 @@ function illegalMove(gameMove, gamesData) {
   if (move.length !== 6)
     return false;
 
+  if (gameMove.slice(0, 5) !== "cell-")
+    return false;
 
+  if (!parseInt(gameMove[5]))
+    return false;
 
   //
   //  gameMove is already played
+  //  is triple checked (player moves, opponent moves, shared moves)
   //
   if (gamesData.allMoves.indexOf(gameMove) > -1)
     return false;
 
+  if (gamesData.myMoves.indexOf(gameMove) > -1)
+    return false;
 
-
+  if (gamesData.opponentMoves.indexOf(gameMove) > -1)
+    return false;
 }
