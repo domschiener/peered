@@ -28,30 +28,30 @@
             <h1 class="games__title">Your Open Games</h1>
             <!-- For each game, generate a tile -->
             {{#each this}}
-              {{#if isOwner currentUser._id game.peer}}
-                <div class="gamer__profile container {{randomColor}} col-xs-3">
-                  <!-- Hover Div -->
-                  <div class="gamer__hover">
-                    <a href="/play/{{_id}}" type="button" class="btn btn-success btn-lg accept_challenge">Go to Game</a>
+              {{#if personalGame _id}}
+              <div class="gamer__profile container {{randomColor}} col-xs-3">
+                <!-- Hover Div -->
+                <div class="gamer__hover">
+                  <a href="/play/{{_id}}" type="button" class="btn btn-success btn-lg accept_challenge">Go to Game</a>
+                </div>
+                <!-- -->
+                <div class="gamer__picture">
+                  <img src="/picture.jpg" />
+                </div>
+                <div class="gamer__info">
+                  <p class="gamer__name">{{game.creator}}</p>
+                </div>
+                <div class="row gamer__footer">
+                  <div class="gamer__bet col-xs-6">
+                    <p class="gamer__title">Bet</p>
+                    <p class="gamer__subtitle">$ {{game.value}}</p>
                   </div>
-                  <!-- -->
-                  <div class="gamer__picture">
-                    <img src="/picture.jpg" />
-                  </div>
-                  <div class="gamer__info">
-                    <p class="gamer__name">{{game.creator}}</p>
-                  </div>
-                  <div class="row gamer__footer">
-                    <div class="gamer__bet col-xs-6">
-                      <p class="gamer__title">Bet</p>
-                      <p class="gamer__subtitle">$ {{game.value}}</p>
-                    </div>
-                    <div class="gamer__grid col-xs-6">
-                      <p class="gamer__title">Game</p>
-                      <p class="gamer__subtitle">{{game.type}}</p>
-                    </div>
+                  <div class="gamer__grid col-xs-6">
+                    <p class="gamer__title">Game</p>
+                    <p class="gamer__subtitle">{{game.type}}</p>
                   </div>
                 </div>
+              </div>
               {{/if}}
             {{/each}}
           </div>
@@ -66,7 +66,7 @@
         <h1 class="games__title">Available Games: <strong>15</strong></h1>
         {{#with allGames}}
           {{#each this}}
-            {{#if notOwner currentUser._id game.peer}}
+            {{#if notPersonalGame _id}}
               <div class="gamer__profile container {{randomColor}} col-xs-3">
                 <!-- Hover Div -->
                 <div class="gamer__hover">

@@ -12,11 +12,14 @@ Template.games.helpers({
   gameData: function(gameID) {
     return Games.findOne({_id: gameID});
   },
-  isOwner: function(userID, gameID) {
-    return (userID === gameID);
+  notPersonalGame: function(gameID) {
+    if (!Meteor.userId())
+      return true;
+      
+    return Meteor.user().games.indexOf(gameID) === -1;
   },
-  notOwner: function(userID, gameID) {
-    return (userID !== gameID);
+  personalGame: function(gameID) {
+    return Meteor.user().games.indexOf(gameID) > -1;
   },
   randomColor: function() {
     var options = [

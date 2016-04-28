@@ -8,10 +8,16 @@
     </nav>
   </header>
   <section class="game__section">
-    {{#if isActiveGame currentUser.games}}
-      {{> tictactoe}}
+    {{#if isGameReady}}
+      {{#if isPlayer}}
+        {{> tictactoe}}
+      {{/if}}
     {{else}}
-      {{> loading}}
+      {{#if isPersonalGame}}
+        {{> tictactoe}}
+      {{else}}
+        {{> loading}}
+      {{/if}}
     {{/if}}
     <!-- {{if !this.open}}
 

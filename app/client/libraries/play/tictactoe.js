@@ -4,7 +4,8 @@ Template.tictactoe.onCreated(function() {
     var thisGame = FlowRouter.getParam('_id');
     self.subscribe('singleGame', thisGame);
   });
-
+  console.log(this);
+  // Setup the Peerjs connection
   peerSetup(function(id) {
     console.log("Success! Your Peer ID is: " + id);
   })
@@ -15,7 +16,7 @@ Template.tictactoe.events({
     var gameID = FlowRouter.getParam('_id');
     var localGameData = GamesData.findOne({_id: gameID});
 
-    // If game not open yet, stop
+    // If game not open yet, abort
     if (!localGameData)
       return false;
 
@@ -24,10 +25,23 @@ Template.tictactoe.events({
     // Get the last element in the list of available connections
     var connection = peer.connections[opponent][peer.connections[opponent].length - 1];
 
+    // If no connection, abort
+    if (!connection)
+      return false;
 
+    console.log(connection)
 
-    var gameMove = event.currentTarget.id;
+    var cellChosen = event.currentTarget.id;
+    var gameMove = parseInt(cellChosen[5])
 
+    if (illegalMove(gameMove, cellChosen, localGameData))
+      return false;
+
+    if (hasPlayerWon(gameMove, localGameData.myMoves)) {
+      //do whatever
+      console.log("You have won")
+    }
+    console.log("nothing wrong")
     // Send the playmove to the other peer
     //   peer stores it in local mongodb
     //   both peers send the move to the server
@@ -95,26 +109,29 @@ function hasPlayerWon(gameMove, playerMoves) {
   return playerWon;
 }
 
-function illegalMove(gameMove, gamesData) {
+function illegalMove(gameMove, chosenCell, gamesData) {
   //  Rigorous error checking, in case someone tries to be smart and enter game
   //  moves via the console
 
   //
   //  gameMove does not fit schema
   //
-  if (move.length !== 6)
+  if (chosenCell.length !== 6)
     return false;
 
-  if (gameMove.slice(0, 5) !== "cell-")
+  if (chosenCell.slice(0, 5) !== "cell-")
     return false;
 
-  if (!parseInt(gameMove[5]))
+  if (!parseInt(chosenCell[5]))
     return false;
 
   //
   //  gameMove is already played
   //  is triple checked (player moves, opponent moves, shared moves)
   //
+  if (!gamesData.allMoves)
+    return false;
+
   if (gamesData.allMoves.indexOf(gameMove) > -1)
     return false;
 

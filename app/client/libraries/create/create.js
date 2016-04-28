@@ -38,7 +38,7 @@ Template.create.events({
       newGame['type'] = 'RockPaperScissor';
     }
 
-    newGame['open'] = $('.private_game').bootstrapSwitch('state');
+    newGame['private'] = $('.private_game').bootstrapSwitch('state');
 
     newGame['betting'] = $('.betswitch').bootstrapSwitch('state');
     newGame['value'] = 0;

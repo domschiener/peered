@@ -1,0 +1,29 @@
+{
+  "name": "peered",
+  "version": "1.0.0",
+  "description": "Peer to Peer gaming based on WebRTC and Ethereum.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domschiener/peered"
+  },
+  "keywords": [
+    "webrtc",
+    "ethereum",
+    "peer",
+    "to",
+    "peer",
+    "gaming",
+    "app",
+    "meteor"
+  ],
+  "author": "Dominik Schiener",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/domschiener/peered/issues"
+  },
+  "homepage": "https://github.com/domschiener/peered"
+}

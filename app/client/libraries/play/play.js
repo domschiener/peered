@@ -7,15 +7,75 @@ Template.play.onCreated(function() {
 });
 
 Template.play.helpers({
-  game: function() {
+  isGameReady: function() {
     var thisGame = FlowRouter.getParam('_id');
-    return Games.findOne({_id: thisGame});
+    return Games.findOne({_id: thisGame}).game.ready;
   },
-  isActiveGame: function(userGames) {
-    if (!userGames)
-      return
-      
+  isPlayer: function() {
+    var currUser = Meteor.user();
+    var activeGames = currUser.games;
+    var personalGames = currUser.personalGames;
     var thisGame = FlowRouter.getParam('_id');
-    return userGames.indexOf(thisGame) > -1;
+
+    if (activeGames.indexOf(thisGame) === -1) {
+      // Redirect user if not active gamer
+      FlowRouter.go('/games');
+      return false;
+    }
+
+    var isPersonalGame;
+    if (!personalGames) {
+      isPersonalGame = false;
+    }
+    else {
+      isPersonalGame = personalGames.indexOf(thisGame) > -1;
+    }
+
+    if (!isPersonalGame) {
+      var gameID =  FlowRouter.getParam('_id');
+      var currentGame = Games.findOne({_id: gameID})
+      var opponent = currentGame.game.peer;
+
+      if (typeof peer.connections !== 'undefined') {
+        var connections = peer.connections[opponent]
+        if (connections) {
+          //If we already have an active connection, abort connection process
+          if (connections[connections.length - 1].open) {
+            return true;
+          }
+        }
+      }
+
+      peerSetup(function(peerID) {
+        if (peerID) {
+          var conn = peer.connect(opponent, {label: gameID, metadata: 'connect'});
+
+          conn.on('open', function() {
+            // We store the Game metadata in a local client-side collection
+            GamesData.insert({_id: gameID, 'opponent': opponent}, function(error, success) {
+              if (!error) {
+                // We add the game to the user's games collection
+                Meteor.call('addGameToUser', gameID, Meteor.userId(), function(err, succ) {
+                  if (!err) {
+                    console.log("Successfully connected to game: ", gameID);
+                  }
+                })
+              }
+            });
+          });
+        }
+      })
+    }
+
+    return true;
+  },
+  isPersonalGame: function() {
+    // Check if creator of game
+    var personalGames = Meteor.user().personalGames;
+    if (!personalGames)
+      return false;
+
+    var thisGame = FlowRouter.getParam('_id');
+    return personalGames.indexOf(thisGame) > -1;
   }
 })

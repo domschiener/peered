@@ -1,6 +1,7 @@
 Template.loading.onRendered(function() {
   var gameID =  FlowRouter.getParam('_id');
-  var opponent = Games.findOne({_id: gameID}).game.peer;
+  var currentGame = Games.findOne({_id: gameID})
+  var opponent = currentGame.game.peer;
 
   peerSetup(function(peerID) {
     if (peerID) {
@@ -14,6 +15,7 @@ Template.loading.onRendered(function() {
             Meteor.call('addGameToUser', gameID, Meteor.userId(), function(err, succ) {
               if (!err) {
                 console.log("Successfully connected to game: ", gameID);
+                Meteor.call('makeGameLive', gameID)
               }
             })
           }

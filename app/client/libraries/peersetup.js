@@ -29,7 +29,7 @@ peerSetup = function(cb) {
     console.log("Received new connection", opponent);
     GamesData.insert({_id: game, 'opponent': opponent}, function(error, success) {
       if (!error) {
-        Meteor.call('makeGameLive', game, opponent)
+        //Do some shit
       }
     });
 
