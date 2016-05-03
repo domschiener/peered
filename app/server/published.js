@@ -5,7 +5,7 @@ Meteor.publish('gameListings', function() {
 
 Meteor.publish('thisGame', function(gameId) {
   //TODO Only return public games
-  return Games.findOne({_id: gameId});
+  return Games.find({_id: gameId});
 });
 
 Meteor.publish("userData", function () {

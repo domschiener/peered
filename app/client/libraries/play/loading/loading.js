@@ -15,12 +15,51 @@ Template.loading.onRendered(function() {
             Meteor.call('addGameToUser', gameID, Meteor.userId(), function(err, succ) {
               if (!err) {
                 console.log("Successfully connected to game: ", gameID);
-                Meteor.call('makeGameLive', gameID)
+                Meteor.call('makeGameLive', gameID, Meteor.userId());
               }
             })
           }
         });
       });
+
+      conn.on('data', function(data) {
+        // If data is a callback, abort
+        if (data === "CB")
+          return
+
+        var localGameData = GamesData.findOne({_id: gameID});
+        var opponent = localGameData.opponent;
+        var cellChosen = data;
+        var gameMove = parseInt(cellChosen[5])
+
+        // Check if move is illegal
+        if (illegalMove(gameMove, cellChosen, localGameData)) {
+          conn.send('WRONGMOVE');
+          return
+        }
+
+        var playerHasWon = false;
+        if (localGameData.myMoves) {
+          // Check whether the player has won
+          if (hasPlayerWon(gameMove, localGameData.myMoves)) {
+            //do whatever
+            playerHasWon = true;
+            console.log("You have won")
+          }
+        }
+
+        GamesData.update({_id: conn.label}, {
+          $push: {
+            'opponentMoves': gameMove,
+            'allMoves': gameMove
+          }
+        }, function(error, success) {
+          if (!error) {
+            conn.send("CB");
+
+          }
+        });
+      })
     }
   })
 })

@@ -1,5 +1,5 @@
 <template name="tictactoe">
-
+  {{#with gameData}}
   <!-- <div class="container">
     <div class="game_notready demo-3">
       <p class="notready__title">Waiting for Players to Join...</p>
@@ -42,17 +42,13 @@
 
     <div id='tictactoe'>
       <ul>
-        <li><button id='cell-1' class='cell'>&nbsp;</button></li>
-        <li><button id='cell-2' class='cell'>&nbsp;</button></li>
-        <li><button id='cell-3' class='cell'>&nbsp;</button></li>
-
-        <li><button id='cell-4' class='cell'>&nbsp;</button></li>
-        <li><button id='cell-5' class='cell'>&nbsp;</button></li>
-        <li><button id='cell-6' class='cell'>&nbsp;</button></li>
-
-        <li><button id='cell-7' class='cell'>&nbsp;</button></li>
-        <li><button id='cell-8' class='cell player-1 checked'>&nbsp;</button></li>
-        <li><button id='cell-9' class='cell player-0 checked'>&nbsp;</button></li>
+        {{#each gameElements}}
+          {{#if isGameMove this ../gameMoves}}
+            <li><button id='cell-{{this}}' class='cell {{findPlayer this ../gameMoves}}'>&nbsp;</button></li>
+          {{else}}
+            <li><button id='cell-{{this}}' class='cell unchecked'>&nbsp;</button></li>
+          {{/if}}
+        {{/each}}
       </ul>
     </div> <!--  tictactoe -->
   </div>  <!--  wrapper -->
@@ -67,4 +63,5 @@
       </div>
     </div>
   </div>  <!--  hoverdiv -->
+  {{/with}}
 </template>

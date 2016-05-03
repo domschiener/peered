@@ -118,11 +118,13 @@
 .cell.player-1::before {
   background-image: url("/images/circle.png");
 }
-.checked {
+.player-0,
+.player-1 {
   background-color: #eee;
   cursor: default;
 }
-.checked:hover {
+.player-0:hover,
+.player-1:hover {
   background-color: #eee;
 }
 
