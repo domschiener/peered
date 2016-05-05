@@ -87,7 +87,6 @@ Template.play.helpers({
             var playerHasWon = false;
             if (localGameData.opponentMoves) {
               // Check whether the player has won
-              console.log("Checking if won", localGameData.opponentMoves)
               if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
                 //do whatever
                 playerHasWon = true;
@@ -102,8 +101,11 @@ Template.play.helpers({
               }
             }, function(error, success) {
               if (!error) {
-                console.log("Sent CB in Playjs")
-                conn.send("CB");
+                if (playerHasWon) {
+                  conn.send("WON")
+                } else {
+                  conn.send("CB");
+                }
               }
             });
 

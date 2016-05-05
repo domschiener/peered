@@ -51,11 +51,10 @@ peerSetup = function(cb) {
       var playerHasWon = false;
       if (localGameData.opponentMoves) {
         // Check whether the player has won
-        console.log("Checking if won", localGameData.opponentMoves)
         if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
           //do whatever
           playerHasWon = true;
-          console.log("You have won")
+          console.log("Opponent has won")
         }
       }
 
@@ -66,12 +65,13 @@ peerSetup = function(cb) {
         }
       }, function(error, success) {
         if (!error) {
-          console.log("Sent CB")
-          conn.send("CB");
+          if (playerHasWon) {
+            conn.send("WON")
+          } else {
+            conn.send("CB");
+          }
         }
       });
-
-      console.log("peersetup", data);
     })
 
     conn.on('close', function() {

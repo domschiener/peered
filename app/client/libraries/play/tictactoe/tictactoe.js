@@ -40,7 +40,11 @@ Template.tictactoe.helpers({
     var player;
     gameMoves.forEach(function(currMove) {
       if (currMove.gameMove === element) {
-        player = currMove.player;
+        if (currMove.player === 'playerZero') {
+          player = "player-0";
+        } else {
+          player = "player-1"
+        }
       }
     })
 
@@ -60,22 +64,21 @@ Template.tictactoe.events({
     var currPlayer = whichPlayer(gameID);
 
     // Creator of game begins
-    console.log(currPlayer, localGameData.allMoves);
-    if (currPlayer === 'player-1') {
+    if (currPlayer === 'playerOne') {
       if (!localGameData.allMoves) {
-        console.log("It is not your turn! Player 0's turn");
+        console.log("Player 0's turn");
         return false;
       }
 
       if (localGameData.allMoves.length % 2 === 0) {
-        console.log("Not even. Player 0's turn");
+        console.log("Player 0's turn");
         return false;
       }
     }
     else {
       if (localGameData.allMoves) {
         if (localGameData.allMoves.length % 2 !== 0) {
-          console.log("Not even. Player 1's turn");
+          console.log("Player 1's turn");
           return false;
         }
       }
@@ -103,13 +106,13 @@ Template.tictactoe.events({
       return false;
     }
 
-
+    var playerHasWon = false;
     if (localGameData.myMoves) {
       // Check whether the player has won
-      console.log("Checking if won", localGameData.myMoves)
       if (hasPlayerWon(gameMove, localGameData.myMoves)) {
         //do whatever
         console.log("You have won")
+        playerHasWon = true;
       }
     }
 
@@ -121,8 +124,6 @@ Template.tictactoe.events({
     connection.once('data', function(data) {
       if (data === "CB") {
         // Store gameData in local browser collection
-        console.log("Storing in GamesData", gameMove, data);
-
         var gameData = {
           'player': currPlayer,
           'playerId': Meteor.userId(),
@@ -137,15 +138,27 @@ Template.tictactoe.events({
               'allMoves': gameMove
             }
           });
-          console.log("Do something2");
         })
-        console.log("We're here now")
-        return
       }
       // If we received no successful callback, show error
       else {
         // TODO
-        console.log("Do something")
+        if (data === "WON" && playerHasWon) {
+          var gameData = {
+            'player': currPlayer,
+            'playerId': Meteor.userId(),
+            'gameMove': gameMove
+          }
+
+          var string = "score." + currPlayer
+          var player = {};
+          player[string] = 1;
+          var playerScore = JSON.stringify(player)
+          console.log(playerScore)
+          Meteor.call('playerWon', gameID, gameData, playerScore, function(error, success) {
+            console.log(success)
+          })
+        }
       }
     })
 
@@ -158,10 +171,10 @@ function whichPlayer(gameID) {
   var personalGames = currUser.personalGames;
 
   // We find out which player made the game move
-  var whichPlayer = "player-1";
+  var whichPlayer = "playerOne";
   if (personalGames) {
     if (personalGames.indexOf(gameID) > -1) {
-      whichPlayer = "player-0"
+      whichPlayer = "playerZero"
     }
   }
 

@@ -41,11 +41,10 @@ Template.loading.onRendered(function() {
         var playerHasWon = false;
         if (localGameData.opponentMoves) {
           // Check whether the player has won
-          console.log("Checking if won", localGameData.opponentMoves)
           if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
             //do whatever
             playerHasWon = true;
-            console.log("You have won")
+            console.log("Opponent have won")
           }
         }
 
@@ -56,8 +55,11 @@ Template.loading.onRendered(function() {
           }
         }, function(error, success) {
           if (!error) {
-            console.log("Sent CB in Loading")
-            conn.send("CB");
+            if (playerHasWon) {
+              conn.send("WON")
+            } else {
+              conn.send("CB");
+            }
           }
         });
       })
