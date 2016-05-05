@@ -75,13 +75,13 @@ hasPlayerWon = function(gameMove, playerMoves) {
     }
   }
 
-  var newMove = parseInt(gameMove[5]);
-  playerMoves.push(newMove);
+  playerMoves.push(gameMove);
 
   if (playerMoves < 3)
     return false;
 
   var playerWon = false;
+  // We iterate over all combinations to see if there is a match
   playerMoves.forEach(function(el) {
     for (var i = 0; i < 8; i++) {
       if (possibilities[i].combo.indexOf(el) > -1) {

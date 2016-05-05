@@ -16,6 +16,9 @@ Template.tictactoe.helpers({
     var thisGame = FlowRouter.getParam('_id');
     return Games.findOne({_id: thisGame});
   },
+  playerData: function(playerID) {
+    return Meteor.users.findOne({_id: playerID});
+  },
   gameElements: function() {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9];
   },
@@ -49,11 +52,33 @@ Template.tictactoe.events({
   'click .unchecked': function(event) {
     var gameID = FlowRouter.getParam('_id');
     var localGameData = GamesData.findOne({_id: gameID});
+    // If a player has won, we make it impossible to move
+    if (localGameData.hasWon) {
+      return false;
+    }
+
     var currPlayer = whichPlayer(gameID);
 
     // Creator of game begins
-    if (currPlayer === 'player-0') {
-      if (!localGameData.allMoves || )
+    console.log(currPlayer, localGameData.allMoves);
+    if (currPlayer === 'player-1') {
+      if (!localGameData.allMoves) {
+        console.log("It is not your turn! Player 0's turn");
+        return false;
+      }
+
+      if (localGameData.allMoves.length % 2 === 0) {
+        console.log("Not even. Player 0's turn");
+        return false;
+      }
+    }
+    else {
+      if (localGameData.allMoves) {
+        if (localGameData.allMoves.length % 2 !== 0) {
+          console.log("Not even. Player 1's turn");
+          return false;
+        }
+      }
     }
 
     // If game not open yet, abort
@@ -73,8 +98,6 @@ Template.tictactoe.events({
     var gameMove = parseInt(cellChosen[5])
 
     // Check if move is illegal
-    console.log(gameMove, cellChosen, localGameData)
-
     if (illegalMove(gameMove, cellChosen, localGameData)) {
       console.log("Illegal Move!")
       return false;
@@ -83,6 +106,7 @@ Template.tictactoe.events({
 
     if (localGameData.myMoves) {
       // Check whether the player has won
+      console.log("Checking if won", localGameData.myMoves)
       if (hasPlayerWon(gameMove, localGameData.myMoves)) {
         //do whatever
         console.log("You have won")
@@ -94,26 +118,29 @@ Template.tictactoe.events({
 
     // We wait for a callback from opponent
     // Then we store the gameMove in local and server collection
-    connection.on('data', function(data) {
+    connection.once('data', function(data) {
       if (data === "CB") {
         // Store gameData in local browser collection
-        GamesData.update({_id: gameID}, {
-          $push: {
-            'myMoves': gameMove,
-            'allMoves': gameMove
-          }
-        });
+        console.log("Storing in GamesData", gameMove, data);
 
         var gameData = {
-          'player': whichPlayer,
+          'player': currPlayer,
           'playerId': Meteor.userId(),
           'gameMove': gameMove
         }
 
         // Only the player who made the current move sends the data to the server
         Meteor.call('storeGameMove', gameID, gameData, function(error, success) {
+          GamesData.update({_id: gameID}, {
+            $push: {
+              'myMoves': gameMove,
+              'allMoves': gameMove
+            }
+          });
           console.log("Do something2");
         })
+        console.log("We're here now")
+        return
       }
       // If we received no successful callback, show error
       else {
@@ -121,6 +148,8 @@ Template.tictactoe.events({
         console.log("Do something")
       }
     })
+
+    delete connection;
   }
 })
 

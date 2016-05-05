@@ -25,10 +25,12 @@ peerSetup = function(cb) {
     var game = conn.label;
     var opponent = conn.peer;
     console.log("Received new connection", opponent);
-    GamesData.insert({_id: game, 'opponent': opponent}, function(error, success) {
-      if (!error) {
-        //Do some shit
-      }
+
+    // We store the Game metadata in a local client-side collection
+    GamesData.insert({
+      '_id': game,
+      'opponent': opponent,
+      'hasWon': false
     });
 
     conn.on('data', function(data) {
@@ -47,9 +49,10 @@ peerSetup = function(cb) {
       }
 
       var playerHasWon = false;
-      if (localGameData.myMoves) {
+      if (localGameData.opponentMoves) {
         // Check whether the player has won
-        if (hasPlayerWon(gameMove, localGameData.myMoves)) {
+        console.log("Checking if won", localGameData.opponentMoves)
+        if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
           //do whatever
           playerHasWon = true;
           console.log("You have won")
@@ -63,10 +66,10 @@ peerSetup = function(cb) {
         }
       }, function(error, success) {
         if (!error) {
+          console.log("Sent CB")
           conn.send("CB");
         }
       });
-
 
       console.log("peersetup", data);
     })

@@ -1,67 +1,79 @@
 <template name="tictactoe">
   {{#with gameData}}
-  <!-- <div class="container">
-    <div class="game_notready demo-3">
-      <p class="notready__title">Waiting for Players to Join...</p>
-      <div class="row">
-        <div class="col-xs-6 vote_why">
-          <p class="notready__desc">We are currently waiting for a Player that wants to take on the challenge and play against you. As soon as someone wants to join, you will see the player appear on the right side. You can then either approve or reject the player.</p>
+    <!-- Created by Michael Mammoliti -->
+    <div id='wrapper'>
+      <div id='ui'>
+        <div class='player'>
+          <img class="top_image" src='/images/cross.png' />
+          <div class='name right'>
+            {{#with playerData game.peer}}
+              <img class="name_picture" src="{{profile.avatar}}" />
+              <p>{{profile.name}}</p>
+            {{/with}}
+          </div>
         </div>
-        <div class="col-xs-6 vote_send">
-          <div class="waitingPlayers"></div>
-          <ul class="loadingCircle">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+        <div id='points'>{{score.playerZero}} - {{score.playerOne}}</div>
+        <div class='player'>
+          <img class="top_image" src='/images/circle.png' />
+          <div class='name'>
+            {{#with playerData game.opponent}}
+              <img class="name_picture" src="{{profile.avatar}}" />
+              <p>{{profile.name}}</p>
+            {{/with}}
+          </div>
         </div>
+      </div>
+
+      <div id='tictactoe'>
+        <!-- If the game is not ready yet, post waiting screen -->
+        {{#unless game.ready}}
+          <div class="hoverdiv container">
+            <div class="game_notready demo-3">
+              <p class="notready__title">Waiting for Players to Join...</p>
+              <div class="row">
+                <div class="col-xs-6 vote_why">
+                  <p class="notready__desc">We are currently waiting for a Player that wants to take on the challenge and play against you. As soon as someone wants to join, you will see the player appear on the right side. You can then either approve or reject the player.</p>
+                </div>
+                <div class="col-xs-6 vote_send">
+                  <div class="waitingPlayers"></div>
+                  <ul class="loadingCircle">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/unless}}
+        <!-- Waiting Screen -->
+
+        <!-- Winning Screen -->
+        {{#if game.won}}
+          <div class='hoverdiv'>
+            <div id='actions'>
+              <p class='big text-center'>&nbsp;</p>
+
+              <div id='controls'>
+                <button id='newround'>NEW ROUND</button>
+                <button id='newgame'>NEW GAME</button>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+        <!-- Winning Screen -->
+
+        <ul class="game_tiles">
+          {{#each gameElements}}
+            {{#if isGameMove this ../gameMoves}}
+              <li><button id='cell-{{this}}' class='cell {{findPlayer this ../gameMoves}}'>&nbsp;</button></li>
+            {{else}}
+              <li><button id='cell-{{this}}' class='cell unchecked'>&nbsp;</button></li>
+            {{/if}}
+          {{/each}}
+        </ul>
       </div>
     </div>
-  </div> -->
-
-  <!-- Created by Michael Mammoliti -->
-  <div id='wrapper'>
-    <div id='ui'>
-      <div class='player'>
-        <img class="top_image" src='/images/cross.png' />
-        <div class='name right'>
-          <img class="name_picture" src="/picture.jpg" />
-          <p>Dominik Schiener</p>
-        </div>
-      </div>
-      <div id='points'>0 - 0</div>
-      <div class='player'>
-        <img class="top_image" src='/images/circle.png' />
-        <div class='name'>
-          <p>Dominik Schiener</p>
-          <img class="name_picture" src="/picture.jpg" />
-        </div>
-      </div>
-    </div> <!--  ui -->
-
-    <div id='tictactoe'>
-      <ul>
-        {{#each gameElements}}
-          {{#if isGameMove this ../gameMoves}}
-            <li><button id='cell-{{this}}' class='cell {{findPlayer this ../gameMoves}}'>&nbsp;</button></li>
-          {{else}}
-            <li><button id='cell-{{this}}' class='cell unchecked'>&nbsp;</button></li>
-          {{/if}}
-        {{/each}}
-      </ul>
-    </div> <!--  tictactoe -->
-  </div>  <!--  wrapper -->
-
-  <div class='hoverdiv hidden'>
-    <div id='actions'>
-      <p class='big text-center'>&nbsp;</p>
-
-      <div id='controls'>
-        <button id='newround'>NEW ROUND</button>
-        <button id='newgame'>NEW GAME</button>
-      </div>
-    </div>
-  </div>  <!--  hoverdiv -->
   {{/with}}
 </template>

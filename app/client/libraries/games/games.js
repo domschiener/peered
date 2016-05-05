@@ -13,8 +13,8 @@ Template.games.helpers({
     return Games.findOne({_id: gameID});
   },
   notPersonalGame: function(gameID) {
-    // If user not logged in, display all available games
-    if (!Meteor.userId())
+    // If user not logged in or user is new, display all available games
+    if (!Meteor.userId() || !Meteor.user().games)
       return true;
 
     return Meteor.user().games.indexOf(gameID) === -1;

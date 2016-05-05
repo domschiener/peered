@@ -52,7 +52,11 @@ Template.play.helpers({
 
           conn.on('open', function() {
             // We store the Game metadata in a local client-side collection
-            GamesData.insert({_id: gameID, 'opponent': opponent}, function(error, success) {
+            GamesData.insert({
+              '_id': gameID,
+              'opponent': opponent,
+              'hasWon': false
+            }, function(error, success) {
               if (!error) {
                 // We add the game to the user's games collection
                 Meteor.call('addGameToUser', gameID, Meteor.userId(), function(err, succ) {
@@ -81,9 +85,10 @@ Template.play.helpers({
             }
 
             var playerHasWon = false;
-            if (localGameData.myMoves) {
+            if (localGameData.opponentMoves) {
               // Check whether the player has won
-              if (hasPlayerWon(gameMove, localGameData.myMoves)) {
+              console.log("Checking if won", localGameData.opponentMoves)
+              if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
                 //do whatever
                 playerHasWon = true;
                 console.log("You have won")
@@ -97,6 +102,7 @@ Template.play.helpers({
               }
             }, function(error, success) {
               if (!error) {
+                console.log("Sent CB in Playjs")
                 conn.send("CB");
               }
             });

@@ -16,19 +16,22 @@ Meteor.methods({
       }
     });
   },
-  // Add a gameID to the users games field
-  addGameToUser: function(game, user) {
-    return Meteor.users.update({_id: user}, {
+  // Set a game to ready
+  makeGameLive: function(gameID, user) {
+    // We add the gameID to the users collection
+    Meteor.users.update({_id: user}, {
       $push: {
-        'games': game
+        'games': gameID
       }
     });
-  },
-  // Set a game to ready
-  makeGameLive: function(gameID, opponentID) {
+
+    // Then we add user as opponent to game and update the game to ready
     return Games.update({_id: gameID}, {
       $set: {
-        'game.opponent': opponentID,
+        'score.playerZero': 1,
+        'score.playerOne': 0,
+        'game.opponent': user,
+        'game.won': false,
         'game.ready': true
       }
     })

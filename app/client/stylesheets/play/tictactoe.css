@@ -19,7 +19,10 @@
   text-align: center;
 }
 
-.absolute, .cell::before, .cell::after, .hoverdiv {
+.absolute,
+.cell::before,
+.cell::after,
+.hoverdiv {
   display: block;
   position: absolute;
   width: 100%;
@@ -32,7 +35,9 @@
   -webkit-transform: translate(-50%, -50%);
 }
 
-.absolute-center, #tictactoe ul, #actions {
+.absolute-center,
+#tictactoe .game_tiles,
+#actions {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -55,7 +60,7 @@
   position: relative;
   background-color: rgba(163, 167, 183, 0.3);
 }
-#tictactoe ul {
+#tictactoe .game_tiles {
   width: 80%;
   max-width: 600px;
   overflow: hidden;
@@ -64,7 +69,7 @@
   box-shadow: 0 5px 0 #8f93a3;
   border: 15px solid #a3a7b7;
 }
-#tictactoe ul li {
+#tictactoe .game_tiles li {
   width: 33.33%;
   height: 0;
   float: left;
@@ -73,16 +78,16 @@
   border-right: 4px solid rgba(183, 187, 203, 0.7);
   border-bottom: 4px solid rgba(183, 187, 203, 0.7);
 }
-#tictactoe ul li:nth-child(3n) {
+#tictactoe .game_tiles li:nth-child(3n) {
   border-right: 0;
 }
-#tictactoe ul li:nth-child(7) {
+#tictactoe .game_tiles li:nth-child(7) {
   border-bottom: 0;
 }
-#tictactoe ul li:nth-child(8) {
+#tictactoe .game_tiles li:nth-child(8) {
   border-bottom: 0;
 }
-#tictactoe ul li:nth-child(9) {
+#tictactoe .game_tiles li:nth-child(9) {
   border-bottom: 0;
 }
 
@@ -245,6 +250,7 @@
 
 .hoverdiv {
   background-color: rgba(255, 255, 255, 0.9);
+  z-index: 1000;
 }
 
 .show {
