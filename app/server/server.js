@@ -66,17 +66,10 @@ Meteor.methods({
   playAgain:function(gameID) {
 
     // Get the sum of all games played currently
-    var numGames = Games.aggregate([{
-      $group: {
-        _id: gameID,
-        totalAmount: {
-          $sum: {
-            $add: ['$score.playerZero', '$score.playerOne']
-          }
-        }
-      }
-    }]);
-    var round = "round" + numGames.totalAmount + "moves"; 
+    var currGame = Games.findOne({_id: gameID});
+    var sumGames = currGame.score.playerZero + currGame.score.playerOne
+    console.log(sumGames);
+    var round = "round" + sumGames + "moves";
 
     return Games.update({_id: gameID}, {
       $rename: {
