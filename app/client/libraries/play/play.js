@@ -70,7 +70,7 @@ Template.play.helpers({
 
           conn.on('data', function(data) {
             // If data is a callback, abort
-            if (data === "CB")
+            if (data === "CB" || data === "WON" || data === "WRONGMOVE" || data === "PLAY")
               return
 
             var localGameData = GamesData.findOne({_id: gameID});
@@ -80,6 +80,7 @@ Template.play.helpers({
 
             // Check if move is illegal
             if (illegalMove(gameMove, cellChosen, localGameData)) {
+              console.log("wrongmove")
               conn.send('WRONGMOVE');
               return
             }
@@ -102,8 +103,10 @@ Template.play.helpers({
             }, function(error, success) {
               if (!error) {
                 if (playerHasWon) {
+                  console.log("won")
                   conn.send("WON")
                 } else {
+                  console.log("cb")
                   conn.send("CB");
                 }
               }

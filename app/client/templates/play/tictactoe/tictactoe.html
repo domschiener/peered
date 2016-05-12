@@ -25,45 +25,22 @@
       </div>
 
       <div id='tictactoe'>
-        <!-- If the game is not ready yet, post waiting screen -->
+        <!-- Waiting view -->
         {{#unless game.ready}}
-          <div class="hoverdiv container">
-            <div class="game_notready demo-3">
-              <p class="notready__title">Waiting for Players to Join...</p>
-              <div class="row">
-                <div class="col-xs-6 vote_why">
-                  <p class="notready__desc">We are currently waiting for a Player that wants to take on the challenge and play against you. As soon as someone wants to join, you will see the player appear on the right side. You can then either approve or reject the player.</p>
-                </div>
-                <div class="col-xs-6 vote_send">
-                  <div class="waitingPlayers"></div>
-                  <ul class="loadingCircle">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          {{> notReady}}
         {{/unless}}
-        <!-- Waiting Screen -->
 
-        <!-- Winning Screen -->
+        <!-- Winning view -->
         {{#if game.won}}
-          <div class='hoverdiv'>
-            <div id='actions'>
-              <p class='big text-center'>&nbsp;</p>
-
-              <div id='controls'>
-                <button id='newround'>NEW ROUND</button>
-                <button id='newgame'>NEW GAME</button>
-              </div>
-            </div>
-          </div>
+          {{> gameWon}}
         {{/if}}
-        <!-- Winning Screen -->
 
+        <!-- GameOver view -->
+        {{#unless game.open}}
+          {{> gameOver}}
+        {{/unless}}
+
+        <!-- Generate TicTacToe game -->
         <ul class="game_tiles">
           {{#each gameElements}}
             {{#if isGameMove this ../gameMoves}}

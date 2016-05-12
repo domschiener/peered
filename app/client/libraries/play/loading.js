@@ -24,7 +24,7 @@ Template.loading.onRendered(function() {
 
       conn.on('data', function(data) {
         // If data is a callback, abort
-        if (data === "CB")
+        if (data === "CB" || data === "WON" || data === "WRONGMOVE" || data === "PLAY")
           return
 
         var localGameData = GamesData.findOne({_id: gameID});
@@ -34,6 +34,7 @@ Template.loading.onRendered(function() {
 
         // Check if move is illegal
         if (illegalMove(gameMove, cellChosen, localGameData)) {
+          console.log("wrongmove")
           conn.send('WRONGMOVE');
           return
         }
@@ -56,8 +57,10 @@ Template.loading.onRendered(function() {
         }, function(error, success) {
           if (!error) {
             if (playerHasWon) {
+              console.log("won")
               conn.send("WON")
             } else {
+              console.log("CB")
               conn.send("CB");
             }
           }

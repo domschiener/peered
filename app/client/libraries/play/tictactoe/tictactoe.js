@@ -56,10 +56,10 @@ Template.tictactoe.events({
   'click .unchecked': function(event) {
     var gameID = FlowRouter.getParam('_id');
     var localGameData = GamesData.findOne({_id: gameID});
+
     // If a player has won, we make it impossible to move
-    if (localGameData.hasWon) {
+    if (localGameData.hasWon)
       return false;
-    }
 
     var currPlayer = whichPlayer(gameID);
 
@@ -91,10 +91,10 @@ Template.tictactoe.events({
     var opponent = localGameData.opponent;
 
     // Get the last element in the list of available connections
-    var connection = peer.connections[opponent][peer.connections[opponent].length - 1];
+    var conn = peer.connections[opponent][peer.connections[opponent].length - 1];
 
     // If no connection, abort
-    if (!connection)
+    if (!conn)
       return false;
 
     var cellChosen = event.currentTarget.id;
@@ -117,11 +117,12 @@ Template.tictactoe.events({
     }
 
     // We send the chosen move to the opponent
-    connection.send(cellChosen);
+    console.log("trying to send data")
+    conn.send(cellChosen);
 
     // We wait for a callback from opponent
     // Then we store the gameMove in local and server collection
-    connection.once('data', function(data) {
+    conn.once('data', function(data) {
       if (data === "CB") {
         // Store gameData in local browser collection
         var gameData = {
@@ -154,15 +155,13 @@ Template.tictactoe.events({
           var player = {};
           player[string] = 1;
           var playerScore = JSON.stringify(player)
-          console.log(playerScore)
-          Meteor.call('playerWon', gameID, gameData, playerScore, function(error, success) {
-            console.log(success)
-          })
+
+          Meteor.call('playerWon', gameID, gameData, playerScore)
         }
       }
     })
 
-    delete connection;
+    delete conn;
   }
 })
 

@@ -1,6 +1,7 @@
 Meteor.methods({
   // Insert a new Game into the Games collection
   newGame: function(data) {
+
     return Games.insert({
       game: data,
       createdAt: Date.now()
@@ -18,6 +19,7 @@ Meteor.methods({
   },
   // Set a game to ready and store game in user collection
   makeGameLive: function(gameID, user) {
+
     // We add the gameID to the users collection
     Meteor.users.update({_id: user}, {
       $push: {
@@ -38,19 +40,18 @@ Meteor.methods({
   },
   // Store a gameMove
   storeGameMove: function(gameID, gameData) {
+
     return Games.update({_id: gameID}, {
       $push: {
         'gameMoves': gameData
       }
     })
   },
-  // A player has won: set game to true, increment score and push game move
+  // A player has won: set game to true, increment score and add game move
   playerWon: function(gameID, gameData, playerScore) {
-    // Dynamically increment current player score
-    console.log(playerScore, typeof playerScore);
 
     var player = JSON.parse(playerScore);
-    console.log(player);
+
     return Games.update({_id: gameID}, {
       $set: {
         'game.won': true
@@ -58,6 +59,40 @@ Meteor.methods({
       $inc: player,
       $push: {
         'gameMoves': gameData
+      }
+    })
+  },
+  // Play a new round, archive existing game moves
+  playAgain:function(gameID) {
+
+    // Get the sum of all games played currently
+    var numGames = Games.aggregate([{
+      $group: {
+        _id: gameID,
+        totalAmount: {
+          $sum: {
+            $add: ['$score.playerZero', '$score.playerOne']
+          }
+        }
+      }
+    }]);
+    var round = "round" + numGames.totalAmount + "moves"; 
+
+    return Games.update({_id: gameID}, {
+      $rename: {
+        'gameMoves': round
+      },
+      $set: {
+        'game.won': false
+      }
+    })
+  },
+  // Set game open to false
+  quitGame: function(gameID) {
+
+    return Games.update({_id: gameID}, {
+      $set: {
+        'game.open': false,
       }
     })
   }

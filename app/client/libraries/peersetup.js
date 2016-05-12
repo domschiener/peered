@@ -35,7 +35,7 @@ peerSetup = function(cb) {
 
     conn.on('data', function(data) {
       // If the data sent is a callback, abort
-      if (data === "CB")
+      if (data === "CB" || data === "WON" || data === "WRONGMOVE" || data === "PLAY")
         return
 
       var localGameData = GamesData.findOne({_id: conn.label});
@@ -45,7 +45,9 @@ peerSetup = function(cb) {
 
       // Check if move is illegal
       if (illegalMove(gameMove, cellChosen, localGameData)) {
+        console.log("sent wrongmove")
         conn.send('WRONGMOVE');
+        return
       }
 
       var playerHasWon = false;
@@ -66,8 +68,10 @@ peerSetup = function(cb) {
       }, function(error, success) {
         if (!error) {
           if (playerHasWon) {
+            console.log("snet won")
             conn.send("WON")
           } else {
+            console.log("sent cb")
             conn.send("CB");
           }
         }

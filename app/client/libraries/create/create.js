@@ -35,10 +35,11 @@ Template.create.events({
       newGame['type'] = 'TicTacToe';
     }
     else {
-      newGame['type'] = 'RockPaperScissor';
+      newGame['type'] = 'RckPprScsr';
     }
 
     newGame['private'] = $('.private_game').bootstrapSwitch('state');
+    newGame['open'] = true;
 
     newGame['betting'] = $('.betswitch').bootstrapSwitch('state');
     newGame['value'] = 0;
