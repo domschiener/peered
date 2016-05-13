@@ -2,7 +2,7 @@ var opponentPlay;
 var playAgain;
 var conn;
 
-Template.gameWon.onCreated(function() {
+Template.gameWon.onRendered(function() {
 
   var gameID = FlowRouter.getParam('_id');
   var localGameData = GamesData.findOne({_id: gameID});

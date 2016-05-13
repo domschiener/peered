@@ -8,7 +8,15 @@ peerSetup = function(cb) {
   }
 
   var user = Meteor.userId();
-  peer = new Peer(user, {key: "czdh4a0vqplj714i"});
+  peer = new Peer(user,
+    {
+      key: "9de7fphrlix2bj4i",
+      debug: 3,
+      config: {'iceServers': [
+        { url: 'stun:stun.l.google.com:19302' },
+        { url: 'stun:stun1.l.google.com:19302' },
+      ]}
+    });
 
   peer.on('open', function(id) {
     cb(id);
