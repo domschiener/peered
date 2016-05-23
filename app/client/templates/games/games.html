@@ -66,36 +66,38 @@
         <h1 class="games__title">Available Games: <strong>15</strong></h1>
         {{#with allGames}}
           {{#each this}}
-            {{#if notPersonalGame _id}}
-              <div class="gamer__profile container {{randomColor}} col-xs-3">
-                <!-- Hover Div -->
-                <div class="gamer__hover">
-                  <p class="gamer__hover-title">Do you want to challenge <u>{{game.creator}}</u>?</p>
-                  <a href="/play/{{_id}}" type="button" class="btn btn-success accept_challenge">Accept Challenge</a>
-                </div>
-                <!-- -->
-                <div class="gamer__picture">
-                  <img src="{{game.avatar}}" />
-                </div>
-                <div class="gamer__info">
-                  <p class="gamer__name">{{game.creator}}</p>
-                </div>
-                <div class="row gamer__footer">
-                  <div class="gamer__bet col-xs-6">
-                    <p class="gamer__title">Bet</p>
-                    <p class="gamer__subtitle">$ {{game.value}}</p>
+            {{#unless game.ready}}
+              {{#if notPersonalGame _id}}
+                <div class="gamer__profile container {{randomColor}} col-xs-3">
+                  <!-- Hover Div -->
+                  <div class="gamer__hover">
+                    <p class="gamer__hover-title">Do you want to challenge <u>{{game.creator}}</u>?</p>
+                    <a href="/play/{{_id}}" type="button" class="btn btn-success accept_challenge">Accept Challenge</a>
                   </div>
-                  <div class="gamer__grid col-xs-6">
-                    <p class="gamer__title">Game</p>
-                    <p class="gamer__subtitle">{{game.type}}</p>
+                  <!-- -->
+                  <div class="gamer__picture">
+                    <img src="{{game.avatar}}" />
                   </div>
-                  <!-- <div class="gamer__right col-xs-4">
-                    <p class="gamer__title">Online</p>
-                    <div class="online"></div>
-                  </div> -->
+                  <div class="gamer__info">
+                    <p class="gamer__name">{{game.creator}}</p>
+                  </div>
+                  <div class="row gamer__footer">
+                    <div class="gamer__bet col-xs-6">
+                      <p class="gamer__title">Bet</p>
+                      <p class="gamer__subtitle">$ {{game.value}}</p>
+                    </div>
+                    <div class="gamer__grid col-xs-6">
+                      <p class="gamer__title">Game</p>
+                      <p class="gamer__subtitle">{{game.type}}</p>
+                    </div>
+                    <!-- <div class="gamer__right col-xs-4">
+                      <p class="gamer__title">Online</p>
+                      <div class="online"></div>
+                    </div> -->
+                  </div>
                 </div>
-              </div>
-            {{/if}}
+              {{/if}}
+            {{/unless}}
           {{/each}}
         {{/with}}
       </div>

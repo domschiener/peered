@@ -7,7 +7,12 @@ Template.games.onCreated(function() {
 
 Template.games.helpers({
   allGames: function() {
-    return Games.find({}).fetch();
+    return Games.find(
+      {
+        'game.open': true,
+        'game.private': false
+      }
+    ).fetch();
   },
   gameData: function(gameID) {
     return Games.findOne({_id: gameID});
