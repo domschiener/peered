@@ -16,7 +16,8 @@ peerSetup = function(cb) {
         { url: 'stun:stun.l.google.com:19302' },
         { url: 'stun:stun1.l.google.com:19302' },
       ]}
-    });
+    }
+  );
 
   peer.on('open', function(id) {
     cb(id);
@@ -43,22 +44,23 @@ peerSetup = function(cb) {
 
     conn.on('data', function(data) {
       // If the data sent is a callback, abort
-      if (data === "CB" || data === "WON" || data === "WRONGMOVE" || data === "PLAY")
+      if (data === "CB" || data === "GAMEOVER" || data === "WRONGMOVE" || data === "PLAY")
         return
 
       var localGameData = GamesData.findOne({_id: conn.label});
       var opponent = localGameData.opponent;
       var cellChosen = data;
       var gameMove = parseInt(cellChosen[5])
-
+      console.log("here")
       // Check if move is illegal
       if (illegalMove(gameMove, cellChosen, localGameData)) {
-        console.log("sent wrongmove")
+        console.log("wrongmove")
         conn.send('WRONGMOVE');
         return
       }
 
       var playerHasWon = false;
+      var gameIsOver = false;
       if (localGameData.opponentMoves) {
         // Check whether the player has won
         if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
@@ -66,6 +68,10 @@ peerSetup = function(cb) {
           playerHasWon = true;
           console.log("Opponent has won")
         }
+
+        // Check whether there is a tie
+        // If the player has won, set to false. Else check if all moves equal to 9
+        gameIsOver = playerHasWon ? false : localGameData.allMoves.length + 1 === 9 ? true : false;
       }
 
       GamesData.update({_id: conn.label}, {
@@ -75,11 +81,9 @@ peerSetup = function(cb) {
         }
       }, function(error, success) {
         if (!error) {
-          if (playerHasWon) {
-            console.log("snet won")
-            conn.send("WON")
+          if (playerHasWon || gameIsOver) {
+            conn.send("GAMEOVER")
           } else {
-            console.log("sent cb")
             conn.send("CB");
           }
         }

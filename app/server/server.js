@@ -47,6 +47,17 @@ Meteor.methods({
       }
     })
   },
+  // Game is a tie, set game to won and add game move
+  gameIsTie: function(gameID, gameData) {
+    return Games.update({_id: gameID}, {
+      $set: {
+        'game.won': true
+      },
+      $push: {
+        'gameMoves': gameData
+      }
+    })
+  },
   // A player has won: set game to true, increment score and add game move
   playerWon: function(gameID, gameData, playerScore) {
 
@@ -86,6 +97,9 @@ Meteor.methods({
     return Games.update({_id: gameID}, {
       $set: {
         'game.open': false,
+      },
+      $pull: {
+        'games': gameID
       }
     })
   }

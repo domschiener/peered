@@ -24,7 +24,7 @@ Template.loading.onRendered(function() {
 
       conn.on('data', function(data) {
         // If data is a callback, abort
-        if (data === "CB" || data === "WON" || data === "WRONGMOVE" || data === "PLAY")
+        if (data === "CB" || data === "GAMEOVER" || data === "WRONGMOVE" || data === "PLAY")
           return
 
         var localGameData = GamesData.findOne({_id: gameID});
@@ -40,13 +40,18 @@ Template.loading.onRendered(function() {
         }
 
         var playerHasWon = false;
+        var gameIsOver = false;
         if (localGameData.opponentMoves) {
           // Check whether the player has won
           if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
             //do whatever
             playerHasWon = true;
-            console.log("Opponent have won")
+            console.log("Opponent has won")
           }
+
+          // Check whether there is a tie
+          // If the player has won, set to false. Else check if all moves equal to 9
+          gameIsOver = playerHasWon ? false : localGameData.allMoves.length + 1 === 9 ? true : false;
         }
 
         GamesData.update({_id: conn.label}, {
@@ -56,11 +61,9 @@ Template.loading.onRendered(function() {
           }
         }, function(error, success) {
           if (!error) {
-            if (playerHasWon) {
-              console.log("won")
-              conn.send("WON")
+            if (playerHasWon || gameIsOver) {
+              conn.send("GAMEOVER")
             } else {
-              console.log("CB")
               conn.send("CB");
             }
           }

@@ -37,12 +37,6 @@ FlowRouter.route('/create', {
 })
 
 FlowRouter.route('/play/:_id', {
-  triggersEnter: [function (context, redirect) {
-    //If user is not logged in, redirect to login
-    if (!Meteor.user()) {
-      redirect('/join');
-    }
-  }],
   action: function () {
     BlazeLayout.render('play');
   }

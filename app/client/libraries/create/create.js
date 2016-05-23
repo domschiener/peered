@@ -20,10 +20,12 @@ Template.create.rendered = function() {
 Template.create.events({
   'click #submitGame': function() {
     var newGame = {};
-    var creator = Meteor.user()
+    var creator = Meteor.user();
     newGame['creator'] = creator.profile.name;
     if (!newGame['creator'])
       newGame['creator'] = creator.services.github.username;
+
+    newGame['avatar'] = creator.profile.avatar;
     newGame['peer'] = creator._id;
 
     newGame['ready'] = false;

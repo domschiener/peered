@@ -107,6 +107,7 @@ Template.tictactoe.events({
     }
 
     var playerHasWon = false;
+    var gameIsOver = false;
     if (localGameData.myMoves) {
       // Check whether the player has won
       if (hasPlayerWon(gameMove, localGameData.myMoves)) {
@@ -114,6 +115,10 @@ Template.tictactoe.events({
         console.log("You have won")
         playerHasWon = true;
       }
+
+      // Check whether there is a tie
+      // If the player has won, set to false. Else check if all moves equal to 9
+      gameIsOver = playerHasWon ? false : localGameData.allMoves.length + 1 === 9 ? true : false;
     }
 
     // We send the chosen move to the opponent
@@ -143,8 +148,18 @@ Template.tictactoe.events({
       }
       // If we received no successful callback, show error
       else {
-        // TODO
-        if (data === "WON" && playerHasWon) {
+        // Game is a tie
+        if (data === "GAMEOVER" && gameIsOver) {
+          var gameData = {
+            'player': currPlayer,
+            'playerId': Meteor.userId(),
+            'gameMove': gameMove
+          }
+
+          Meteor.call('gameIsTie', gameID, gameData)
+        }
+        // A player has won
+        else if (data === "GAMEOVER" && playerHasWon) {
           var gameData = {
             'player': currPlayer,
             'playerId': Meteor.userId(),

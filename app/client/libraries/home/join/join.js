@@ -11,7 +11,7 @@ Template.join.events({
 Accounts.onLogin(function() {
   var path = FlowRouter.current().path;
   // we only do it if the user is in the login page
-  if(path === "/join"){
+  if (path === "/join"){
     FlowRouter.go("/games");
   }
 });

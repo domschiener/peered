@@ -3,6 +3,16 @@ Template.play.onCreated(function() {
   self.autorun(function() {
     var thisGame = FlowRouter.getParam('_id');
     self.subscribe('singleGame', thisGame);
+    var userDataSub = self.subscribe('userData');
+
+    if (userDataSub.ready()) {
+      console.log("hey")
+
+      //If user is not logged in, redirect to login
+      if (!Meteor.user()) {
+        redirect('/join');
+      }
+    }
   });
 });
 
@@ -67,52 +77,6 @@ Template.play.helpers({
               }
             });
           });
-
-          conn.on('data', function(data) {
-            // If data is a callback, abort
-            if (data === "CB" || data === "WON" || data === "WRONGMOVE" || data === "PLAY")
-              return
-
-            var localGameData = GamesData.findOne({_id: gameID});
-            var opponent = localGameData.opponent;
-            var cellChosen = data;
-            var gameMove = parseInt(cellChosen[5])
-
-            // Check if move is illegal
-            if (illegalMove(gameMove, cellChosen, localGameData)) {
-              console.log("wrongmove")
-              conn.send('WRONGMOVE');
-              return
-            }
-
-            var playerHasWon = false;
-            if (localGameData.opponentMoves) {
-              // Check whether the player has won
-              if (hasPlayerWon(gameMove, localGameData.opponentMoves)) {
-                //do whatever
-                playerHasWon = true;
-                console.log("You have won")
-              }
-            }
-
-            GamesData.update({_id: conn.label}, {
-              $push: {
-                'opponentMoves': gameMove,
-                'allMoves': gameMove
-              }
-            }, function(error, success) {
-              if (!error) {
-                if (playerHasWon) {
-                  console.log("won")
-                  conn.send("WON")
-                } else {
-                  console.log("cb")
-                  conn.send("CB");
-                }
-              }
-            });
-
-          })
         }
       })
     }
