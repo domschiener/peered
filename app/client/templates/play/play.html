@@ -2,21 +2,23 @@
   <header>
     <nav class="navbar__play">
       <ul class="navbar__elements">
-        <li></li>
+        <li><a href="/games" class="btn navbar__button">Quit Game</a></li>
         <li><a class="navbar__about" href="#">About</a></li>
       </ul>
     </nav>
   </header>
   <section class="game__section">
-    {{#if isGameReady}}
-      {{#if isPlayer}}
-        {{> tictactoe}}
-      {{/if}}
-    {{else}}
-      {{#if isPersonalGame}}
-        {{> tictactoe}}
+    {{#if Template.subscriptionsReady}}
+      {{#if isGameReady}}
+        {{#if isPlayer}}
+          {{> tictactoe}}
+        {{/if}}
       {{else}}
-        {{> loading}}
+        {{#if isPersonalGame}}
+          {{> tictactoe}}
+        {{else}}
+          {{> loading}}
+        {{/if}}
       {{/if}}
     {{/if}}
   </section>

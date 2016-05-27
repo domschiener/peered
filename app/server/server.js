@@ -79,7 +79,7 @@ Meteor.methods({
     // Get the sum of all games played currently
     var currGame = Games.findOne({_id: gameID});
     var sumGames = currGame.score.playerZero + currGame.score.playerOne
-    console.log(sumGames);
+
     var round = "round" + sumGames + "moves";
 
     return Games.update({_id: gameID}, {

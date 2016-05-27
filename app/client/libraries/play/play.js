@@ -2,12 +2,10 @@ Template.play.onCreated(function() {
   var self = this;
   self.autorun(function() {
     var thisGame = FlowRouter.getParam('_id');
-    self.subscribe('singleGame', thisGame);
+    self.subscribe('thisGame', thisGame);
     var userDataSub = self.subscribe('userData');
 
     if (userDataSub.ready()) {
-      console.log("hey")
-
       //If user is not logged in, redirect to login
       if (!Meteor.user()) {
         redirect('/join');
@@ -19,7 +17,11 @@ Template.play.onCreated(function() {
 Template.play.helpers({
   isGameReady: function() {
     var thisGame = FlowRouter.getParam('_id');
-    return Games.findOne({_id: thisGame}).game.ready;
+    var gameData = Games.findOne({_id: thisGame})
+    if (!gameData)
+      return
+
+    return gameData.game.ready;
   },
   isPlayer: function() {
     var currUser = Meteor.user();
@@ -85,7 +87,11 @@ Template.play.helpers({
   },
   isPersonalGame: function() {
     // Check if creator of game
-    var personalGames = Meteor.user().personalGames;
+    var currUser = Meteor.user()
+    if (!currUser)
+      return
+
+    var personalGames = currUser.personalGames;
     if (!personalGames)
       return false;
 

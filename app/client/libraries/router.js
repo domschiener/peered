@@ -37,6 +37,9 @@ FlowRouter.route('/create', {
 })
 
 FlowRouter.route('/play/:_id', {
+  subscriptions: function(params) {
+    this.register('thisGame', Meteor.subscribe('thisGame', params._id));
+  },
   action: function () {
     BlazeLayout.render('play');
   }
