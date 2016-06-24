@@ -1,6 +1,6 @@
 Template.loading.onCreated(function() {
   Tracker.autorun(function() {
-      FlowRouter.subsReady("thisGame");
+    FlowRouter.subsReady("thisGame");
   });
 })
 
@@ -10,7 +10,7 @@ Template.loading.onRendered(function() {
     var gameID = FlowRouter.getParam('_id');
     var currentGame = Games.findOne({_id: gameID});
 
-    if (!currentGame) 
+    if (!currentGame)
       return
 
 

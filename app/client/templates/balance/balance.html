@@ -1,0 +1,70 @@
+<template name="balance">
+  <header>
+    <nav class="navbar__play">
+      <ul class="navbar__elements">
+        {{#if currentUser}}
+          <li><a href="/create" class="btn navbar__button">Create Game</a></li>
+        {{else}}
+          <li><a href="/join" class="btn navbar__button">Join Now</a></li>
+        {{/if}}
+        <li><a class="navbar__about" href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="balance">
+    <div class="container balance__container">
+      <div class="row">
+        <div class="col-xs-4 balance__account">
+          <h1 class="balance__title">
+            My Wallet
+            <span class="glyphicon glyphicon-plus generate__icon" aria-hidden="true"></span>
+
+            <div class="modal fade" id="genAddressModal" tabindex="-1" role="dialog" aria-labelledby="genAddressLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="genAddressLabel">Generate New Address</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="alert alert-danger alert__disclaimer" role="alert"><h4>IMPORTANT!</h4> Please keep in mind that Peered (this website) is a Proof of Concept. Therefore, as always, there remains a chance of things going terribly wrong - which can result in you losing the Ether which you have deposited on this platform. Keep this in mind and do not deposit too much. <strong>Use at your own risk</strong>. Don't blame me.</div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </h1>
+          <div class="balance__address">
+            <div class="generate__address address__box">
+              <span class="generate__address-title">Personal</span>
+              <textarea class="address__element" rows="3" cols="16">0xbfea0c42c80e8baa33c26d7f0435485780823d56</textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-8 balance__value">
+          <div class="balance__header">
+            <h1 class="balance__title left">Balance</h1>
+            <h1 class="balance__title right"><strong>120.12341</strong></h1>
+          </div>
+          <div class="balance__history">
+            <div class="balance__deposits col-xs-6">
+              <span class="balance__history-title">Deposits</span>
+              <p class="balance__history-value">234</p>
+            </div>
+            <div class="balance__withdrawals col-xs-6">
+              <span class="balance__history-title">Withdrawals</span>
+              <p class="balance__history-value">124</p>
+            </div>
+          </div>
+          <div class="withdrawal__button">
+            <button class="make__withdrawal"><span>Make Withdrawal</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

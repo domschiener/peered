@@ -1,7 +1,7 @@
 {
   "name": "peered",
   "version": "1.0.0",
-  "description": "Peer to Peer gaming based on WebRTC and Ethereum.",
+  "description": "Peer to Peer Browser Gaming based on WebRTC and Ethereum",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,17 +13,22 @@
   "keywords": [
     "webrtc",
     "ethereum",
-    "betting",
-    "tictactoe",
-    "browser"
-    "gaming",
-    "app",
-    "meteor"
+    "browser",
+    "games",
+    "p2p",
+    "smart",
+    "contracts"
   ],
   "author": "Dominik Schiener",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/domschiener/peered/issues"
   },
-  "homepage": "https://github.com/domschiener/peered"
+  "homepage": "https://github.com/domschiener/peered",
+  "dependencies": {
+    "eth-lightwallet": "^2.4.3",
+    "hooked-web3-provider": "^1.0.0",
+    "install": "^0.8.1",
+    "npm": "^3.9.5"
+  }
 }

@@ -1,0 +1,166 @@
+.balance__container {
+  border-radius: 8px;
+  margin: 50px auto;
+  height: 100%;
+  min-height: 450px;
+  max-width: 850px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 5px 27px -8px rgba(0,0,0,0.85);
+  -moz-box-shadow: 0px 5px 27px -8px rgba(0,0,0,0.85);
+  box-shadow: 0px 5px 27px -8px rgba(0,0,0,0.85);
+  border: 1px #ccc solid;
+}
+
+.balance__account {
+  background-color: #F2F2F2;
+  min-height: 450px;
+  padding: 15px 25px;
+  border-right: 1px #ccc solid;
+}
+
+.balance__value {
+  min-height: 450px;
+  padding: 15px 25px;
+}
+
+.balance__header {
+  justify-content: space-between;
+  margin: 0 0 20px;
+  padding: 0 0 90px;
+  border-bottom: 1px solid #ccc;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+/**
+  *   Address Css
+  **/
+
+.generate__icon {
+  font-size: 30px;
+  margin-left: 15px;
+}
+
+.generate__icon:hover {
+  cursor: pointer;
+}
+
+.address__box {
+  height: 100px;
+  width: 80%;
+  background-color: #fff;
+  border: 2px solid #38C5FF;
+  border-radius: 6px;
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.generate__address-title {
+  position: relative;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  align-self: center;
+}
+
+.address__element {
+  text-align: center;
+  align-self: center;
+}
+
+.alert__disclaimer {
+  font-size: 14px;
+}
+
+/**
+  *   Balance Css
+  **/
+
+.balance__history,
+.balance__address {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.balance__deposits,
+.balance__withdrawals {
+  height: 100px;
+  width: 40%;
+  border: 2px solid #38C5FF;
+  margin: 15px;
+  border-radius: 6px;
+  text-align: center;
+  align-self: center;
+}
+
+.balance__history-title {
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  top: -13px;
+  background-color: #fff;
+}
+
+.balance__history-value {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.withdrawal__button {
+  text-align: center;
+}
+
+.make__withdrawal {
+  height: 50px;
+  min-width: 200px;
+  font-size: 22px;
+  background-color: #451268;
+}
+
+.make__withdrawal span {
+  margin: 8px 20px;
+}
+
+.make__withdrawal {
+  white-space: nowrap;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.1s all ease;
+  color: #fff;
+  box-shadow: 0px 0px 0px 0px #B8B8B8;
+  border-bottom: 1px solid #370e53;
+  outline: 0;
+}
+
+.make__withdrawal:hover {
+  background-color: #370e53;
+  top: -2px;
+  border-bottom: 2px solid #290a3e;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+}
+
+.make__withdrawal:active {
+  top: 0px;
+  border: 1px solid #290a3e;
+  background-color: #370e53;
+  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.make__withdrawal::-moz-focus-inner {
+  border: 0;
+}
+
+.make__withdrawal a {
+  outline: 0;
+  color: #fff;
+}
